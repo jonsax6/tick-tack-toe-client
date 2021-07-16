@@ -7,13 +7,13 @@
 }
 
 .main {
-  background-color: lightskyblue;
+  background-color: lightgrey;
   height: 100vh;
 }
 
 .game_box {
-  height: 800px;
-  width: 800px;
+  height: 500px;
+  width: 500px;
   background-color: lightgray;
 }
 
@@ -28,4 +28,9 @@
 
 .grid-row {
   height: calc(100%/3)
+}
+
+#ttt-icon {
+  height: 30px;
+  margin-right: 10px;
 }
