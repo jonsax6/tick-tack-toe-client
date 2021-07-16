@@ -1,1 +1,31 @@
 @import '~bootstrap/scss/bootstrap';
+
+.container {
+  display: flex;
+  height: 100%;
+  justify-content: center;
+}
+
+.main {
+  background-color: lightskyblue;
+  height: 100vh;
+}
+
+.game_box {
+  height: 800px;
+  width: 800px;
+  background-color: lightgray;
+}
+
+.game_row {
+    margin-top: 100px;
+}
+
+.box {
+  background-color: blue;
+  border: 5px solid;
+}
+
+.grid-row {
+  height: calc(100%/3)
+}

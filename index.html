@@ -12,6 +12,56 @@
       <script src="public/application.js" type="text/javascript" charset="utf-8" defer></script>
     </head>
     <body>
-      <h1>Browser Template</h1>
+      <div class="container-lg">
+        <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light">
+          <div class="container-fluid">
+            <a class="navbar-brand" href="#">Tick Tack Toe</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
+              aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+              <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                  <a class="nav-link active" aria-current="page" href="#">Username</a>
+                </li>
+              </ul>
+              <span class="navbar-text mr-5">
+                <span>Score &nbsp &nbsp</span>
+
+                <span class="score-heading">X</span>
+                <span id="x-wins" class="score-points">5</span>
+              </span>
+              <span>&nbsp&nbsp</span>
+              <span class="navbar-text mr-5">
+                <span class="score-heading">O</span>
+                <span id="o-wins" class="score-points">4</span>
+              </span>
+            </div>
+          </div>
+        </nav>
+        <div class="row main">
+          <div class="row game_row">
+            <div class="col-8 mx-auto game_box mt-5">
+              <div class="row grid-row">
+                <div class="col-4 box"></div>
+                <div class="col-4 box"></div>
+                <div class="col-4 box"></div>
+              </div>
+              <div class="row grid-row">
+                <div class="col-4 box"></div>
+                <div class="col-4 box"></div>
+                <div class="col-4 box"></div>
+              </div>
+              <div class="row grid-row">
+                <div class="col-4 box"></div>
+                <div class="col-4 box"></div>
+                <div class="col-4 box"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
     </body>
 </html>
