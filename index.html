@@ -13,6 +13,7 @@
     </head>
     <body>
       <div class="container-lg">
+        <!-- navbar -->
         <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
           <div class="container-fluid">
             <span class="navbar-brand"><img id="ttt-icon" src="app/images/tac.png">Tick Tack Toe</span>
@@ -23,40 +24,110 @@
             <div class="collapse navbar-collapse" id="navbarText">
               <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                  <span id="username-display" class="nav-link active">Username</span>
+                  <span id="username-display" class="nav-link active"></span>
                 </li>
               </ul>
+              <!-- sign-out button -->
+              <button id="sign-out-button" type="submit" class="btn btn-secondary">Sign Out</button>
+              <span class="spacer-20"></span>
               <span class="navbar-text mr-5">
-                <span>Score &nbsp &nbsp</span>
-
+                <span>Score</span>
+              </span>
+              <span class="spacer-20"></span>
+              <span class="navbar-text mr-5">
                 <span class="score-heading">X</span>
-                <span id="x-wins" class="score-points">5</span>
+                <span id="x-wins" class="score-points">-</span>
               </span>
               <span>&nbsp&nbsp</span>
               <span class="navbar-text mr-5">
                 <span class="score-heading">O</span>
-                <span id="o-wins" class="score-points">4</span>
+                <span id="o-wins" class="score-points">-</span>
               </span>
             </div>
           </div>
         </nav>
         <div class="row main">
+          <!-- login message -->
+          <div class="row message">
+            <div id="message-container" class="col-6">
+              <h6 id="login-message"></h6>
+            </div>
+          </div>
+          <!-- login forms container -->
+          <div class="row forms">
+            <div id="sign-in" class="row sign-in">
+              <div class="col-6 m-auto">
+                <form id="sign-in-form">
+                  <h4>Login to Tick Tack Toe:</h4>
+                  <div class="mb-3">
+                    <label for="signin-email" class="form-label">Email address</label>
+                    <input name="credentials[email]" type="email" class="form-control" placeholder="email@example.com">
+                  </div>
+                  <div class="mb-3">
+                    <label for="signin-password" class="form-label">Password</label>
+                    <input name="credentials[password]" type="password" class="form-control" placeholder="enter password">
+                  </div>
+                  <button type="submit" class="btn btn-primary">Login</button>
+                </form>
+              </div>
+            </div>
+            <div id="sign-up" class="row sign-up">
+              <div class="col-6 m-auto">
+                <form id="sign-up-form">
+                  <h4>Sign up for a new account:</h4>
+                  <div class="mb-3">
+                    <label class="form-label">Email address</label>
+                    <input name="credentials[email]" type="email" class="form-control" placeholder="email@example.com">
+                    <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+                  </div>
+                  <div class="mb-3">
+                    <label class="form-label">Password</label>
+                    <input name="credentials[password]" type="password" class="form-control" placeholder="enter a password">
+                  </div>
+                  <div class="mb-3">
+                    <label class="form-label">Re-type Password</label>
+                    <input name="credentials[password_confirmation]" type="password" class="form-control"
+                      placeholder="re-type your password">
+                  </div>
+                  <button type="submit" class="btn btn-primary">Register</button>
+                </form>
+              </div>
+            </div>
+          </div>
           <div class="row game_row">
-            <div class="col-8 mx-auto game_box mt-5">
+            <div class="col-10 mx-auto game_box mt-5">
               <div class="row grid-row">
-                <div class="col-4 box"></div>
-                <div class="col-4 box"></div>
-                <div class="col-4 box"></div>
+                <div id="box_0" class="col-4 box">
+                  <div class="col-12 box_letter">O</div>
+                </div>
+                <div id="box_1" class="col-4 box">
+                  <div class="col-12 box_letter">X</div>
+                </div>
+                <div id="box_2" class="col-4 box">
+                  <div class="col-12 box_letter">O</div>
+                </div>
               </div>
               <div class="row grid-row">
-                <div class="col-4 box"></div>
-                <div class="col-4 box"></div>
-                <div class="col-4 box"></div>
+                <div id="box_3" class="col-4 box">
+                  <div class="col-12 box_letter">X</div>
+                </div>
+                <div id="box_4" class="col-4 box">
+                  <div class="col-12 box_letter">O</div>
+                </div>
+                <div id="box_5" class="col-4 box">
+                  <div class="col-12 box_letter">O</div>
+                </div>
               </div>
               <div class="row grid-row">
-                <div class="col-4 box"></div>
-                <div class="col-4 box"></div>
-                <div class="col-4 box"></div>
+                <div id="box_6" class="col-4 box">
+                  <div class="col-12 box_letter">O</div>
+                </div>
+                <div id="box_7" class="col-4 box">
+                  <div class="col-12 box_letter">X</div>
+                </div>
+                <div id="box_8" class="col-4 box">
+                  <div class="col-12 box_letter">X</div>
+                </div>
               </div>
             </div>
           </div>
