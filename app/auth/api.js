@@ -1,5 +1,4 @@
 'use strict'
-const token = require('./ui')
 const store = require('../store')
 
 const signUp = (data) => {
@@ -21,15 +20,39 @@ const signIn = (data) => {
 const signOut = () => {
   return $.ajax({
     url: 'https://tic-tac-toe-api-development.herokuapp.com/sign-out',
-    method: "DELETE",
+    method: 'DELETE',
     headers: {
-      Authorization: "Bearer " + store.token,
+      Authorization: 'Bearer ' + store.token,
     },
   });
+}
+
+const gameStart = (data) => {
+  return $.ajax({
+    url: 'https://tic-tac-toe-api-development.herokuapp.com/games',
+    method: 'POST',
+    headers: {
+      Authorization: 'Bearer ' + store.token,
+    },
+    data
+  });
+}
+
+const cellSelect = (data) => {
+  return $.ajax({
+    url: 'https://tic-tac-toe-api-development.herokuapp.com/games/' + store.id,
+    method: 'PATCH',
+    headers: {
+      Authorization: 'Bearer ' + store.token,
+    },
+    data
+  })
 }
 
 module.exports = {
   signUp,
   signIn,
-  signOut
+  signOut,
+  gameStart,
+  cellSelect
 }

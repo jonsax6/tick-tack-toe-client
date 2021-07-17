@@ -38,9 +38,27 @@ const onSignOutSuccess = () => {
   $('#sign-in-form').trigger("reset");
 }
 
+const onGameStartSuccess = (response) => {
+  store.id = response.game._id
+  console.log(store.id)
+  console.log('new game created...')
+  $("#sign-in-form").trigger("reset");
+  $('.box_letter').text('')
+  store.player = 'X'
+}
+
 module.exports = {
   onSignUpSuccess,
   onFailure,
   onSignInSuccess,
-  onSignOutSuccess
-}
+  onSignOutSuccess,
+  onGameStartSuccess
+};
+
+// game: cells: (9)[("", "", "", "", "", "", "", "", "")];
+// createdAt: "2021-07-17T18:28:26.055Z";
+// over: false;
+// owner: "60f1f95689991200172c55a2";
+// updatedAt: "2021-07-17T18:28:26.055Z";
+// __v: 0;
+// _id: "60f3214ac0af3300174bdf5e";

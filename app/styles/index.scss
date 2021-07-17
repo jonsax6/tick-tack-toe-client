@@ -13,10 +13,10 @@
 }
 
 .game_box {
-  height: 500px;
-  width: 500px;
+  height: 600px;
+  width: 600px;
   background-color: lightgray;
-  margin-bottom: 100px;
+  margin-bottom: 20px;
   border-radius: 1rem;
 }
 
@@ -66,60 +66,64 @@
   margin-bottom: 30px;
 }
 
+#new-game-button {
+  margin-bottom: 100px;
+}
+
 #ttt-icon {
   height: 30px;
   margin-right: 10px;
 }
 
-#box_0 {
+#box-0 {
   display: flex;
   border-top: none;
   border-left: none;
   border-radius: 1rem 0 0 0;
 }
 
-.box_letter {
-  position: relative;
-  top: 15px;
-  left: 30px;
-  height: 75%;
-  width: 75%;
-  font-family: 'Varela Round';
-  font-size: 100px;
-}
-
-#box_1 {
+#box-1 {
   border-top: none;
 }
 
-#box_2 {
+#box-2 {
   border-top: none;
   border-right: none;
     border-radius: 0 1rem 0 0;
 
 }
 
-#box_3 {
+#box-3 {
   border-left: none;
 }
 
-#box_5 {
+#box-5 {
   border-right: none;
 }
 
-#box_6 {
+#box-6 {
   border-bottom: none;
   border-left: none;
   border-radius: 0 0 0 1rem;
 
 }
 
-#box_7 {
+#box-7 {
   border-bottom: none;
 }
 
-#box_8 {
+#box-8 {
   border-bottom: none;
   border-right: none;
   border-radius: 0 0 1rem 0;
+}
+
+.box-letter {
+  position: relative;
+  top: 30px;
+  left: 45px;
+  height: 75%;
+  width: 75%;
+  font-family: 'Varela Round';
+  font-size: 100px;
 }
