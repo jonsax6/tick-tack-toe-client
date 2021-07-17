@@ -11,7 +11,7 @@ const onFailure = (error) => {
   console.log(`Error, status: ${error.status}`)
   $('#login-message').show()
   $('#login-message').text(`Error... status: ${error.status}`)
-  $('#sign-up').trigger('reset')
+  $('#sign-up-form').trigger('reset')
 }
 
 const onSignInSuccess = (response) => {
@@ -19,7 +19,7 @@ const onSignInSuccess = (response) => {
   store.token = response.user.token
   store.user = response.user.email
   $('#username-display').text(`profile: ${store.user}`)
-  $('#sign-in').trigger('reset')
+  $('#sign-in-form').trigger('reset')
   $('#sign-in').hide()
   $('#sign-up').hide()
   $('#sign-out-button').show()
@@ -35,7 +35,7 @@ const onSignOutSuccess = () => {
   $('#sign-out-button').hide();
   // await setTimeout($('login-message').hide(), 5000)
   $('.game_row').hide();
-  $('#sign-in').trigger("reset");
+  $('#sign-in-form').trigger("reset");
 }
 
 module.exports = {
