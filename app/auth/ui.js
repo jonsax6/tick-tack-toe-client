@@ -15,7 +15,7 @@ const onFailure = (error) => {
 }
 
 const onSignInSuccess = (response) => {
-  console.log('signin success')
+  console.log('sign-in success')
   store.token = response.user.token
   store.user = response.user.email
   $('#username-display').text(`profile: ${store.user}`)
@@ -26,7 +26,7 @@ const onSignInSuccess = (response) => {
   $('.game_row').show()
 }
 
-const onSignOutSuccess = async () => {
+const onSignOutSuccess = () => {
   console.log("sign out success");
   $('#login-message').show();
   $('#login-message').text(`Thank you for playing!... Until next time.`);
