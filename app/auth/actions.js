@@ -1,4 +1,5 @@
 const store = require('../store')
+const ui = require('./ui')
 
 const wins = [
   [ 0, 1, 2 ],
@@ -12,14 +13,6 @@ const wins = [
 ]
 
 const checkPlayerWin = (n) => {
-  let won = wins.some((win) => {
-    win.every(i => {
-      gameBoard[i] === n})
-  })
-  return won
-}
-
-const checkSideWin = (n) => {
   winner = false
   wins.forEach(win => {
     if (
@@ -33,13 +26,17 @@ const checkSideWin = (n) => {
   return winner
 }
 
+const checkTie = (board) => {
+  return board.every(cell => cell !== '')
+}
+
 const checkWin = (a, b) => {
-  if (checkSideWin(a)) {
+  if (checkPlayerWin(a)) {
     store.winner = a
-  } else if (checkSideWin(b)) {
+  } else if (checkPlayerWin(b)) {
     store.winner = b
   }
-  return checkSideWin(a) || checkSideWin(b)
+  return checkPlayerWin(a) || checkPlayerWin(b)
 }
 
 const changePlayer = () => {
@@ -50,10 +47,17 @@ const changePlayer = () => {
   }
 }
 
+const getAllGames = () => {
 
+  api.allGames(store.token)
+    .then(ui.onGetAllGamesSuccess)
+    .catch(ui.onFailure);
+}
 
 
 module.exports = {
   checkWin,
-  changePlayer
+  checkTie,
+  changePlayer,
+  getAllGames
 }

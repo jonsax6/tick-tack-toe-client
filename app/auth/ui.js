@@ -1,5 +1,6 @@
 'use strict'
 const store = require('../store')
+const actions = require('./actions')
 
 const onSignUpSuccess = (response) => {
   console.log('Sign-up success!')
@@ -41,20 +42,28 @@ const onSignOutSuccess = () => {
   $('#sign-in-form').trigger('reset')
 }
 
+const onGetAllGamesSuccess = (response) => {
+  console.log(response)
+}
+
 const onGameStartSuccess = (response) => {
   store.id = response.game._id
   store.gameBoard = response.game.cells
   store.gameWon = false
+  store.gameTie = false
+  store.gameOver = false
   console.log(store.id)
   console.log('new game created...')
   $('#sign-in-form').trigger('reset')
   $('.box-letter').text('')
   $('.message').hide()
-  $(".box").removeClass("box-game-over")
+  $('.box').removeClass('box-game-over')
+  $('.box').removeClass('box-game-tie')
 
   store.player = 'X'
   store.playing = true
   $("#player-turn").text("It's your turn, " + store.player)
+  // actions.getAllGames()
 }
 
 const onCellSelectSuccess = () => {
@@ -67,7 +76,8 @@ module.exports = {
   onSignInSuccess,
   onSignOutSuccess,
   onGameStartSuccess,
-  onCellSelectSuccess
+  onCellSelectSuccess,
+  onGetAllGamesSuccess
 }
 
 // game: cells: (9) const gameBoard = ['X', '', '', '', 'X', '', '', '', 'X']

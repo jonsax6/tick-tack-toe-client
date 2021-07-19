@@ -66,8 +66,8 @@ const onCellSelect = (event) => {
     $(".message").show();
     $("#user-message").text('Click "New Game" to play a new game!')
   }
-  // checks if the game has been won, if so, displays message to start a new game
-  else if (store.gameWon === true) {
+  // checks if the game has been won or tied, if so, displays message to start a new game
+  else if (store.gameWon || store.gameTie) {
     $('.message').show()
     $('#user-message').text('The game ended! Click "Start Game" to play again!')
   }
@@ -77,25 +77,41 @@ const onCellSelect = (event) => {
     console.log("clicked..." + index)
     // add store.player to the box letter div
     $(`#box-letter-${index}`).text(store.player)
+    // now update the store state object's gameBoard on that index in the array
     store.gameBoard[index] = store.player
 
-    // check to see if there is a winner
+    // now check to see if there is a winner and save result to store.gameWon
     store.gameWon = actions.checkWin('X', 'O')
-    console.log(store.gameBoard)
-    console.log('game won? ' + store.gameWon)
+
+    // then check to see if there is a tie game and save result to store.gameTie
+    store.gameTie = actions.checkTie(store.gameBoard)
+
+    // checks if either win or tie is true, then changes gameOver to true if either returns true
+    if (store.gameWon || store.gameTie) {
+      store.gameOver = true
+    }
+
+    // if there's a winner, change the board color to green, then reset game array and set playing to false
     if (store.gameWon) {
       $('.box').addClass('box-game-over')
       store.gameBoard = []
       store.playing = false
     }
-    // create the data object for the API PATCH
+    // if tie game, change board color to yellow, then reset game array and set playing to false
+    else if (store.gameTie) {
+      $('.box').addClass('box-game-tie')
+      store.gameBoard = []
+      store.playing = false
+    }
+
+    // now create the data object for the API PATCH
     const data = {
       game: {
         cell: {
           index: index,
           value: store.player,
         },
-        over: store.gameWon,
+        over: store.gameOver,
       },
     }
     // send the data object to the API PATCH call
@@ -106,13 +122,16 @@ const onCellSelect = (event) => {
       .catch(ui.onFailure)
 
     // change the player in store.player object for next turn
-    if (!store.gameWon) {
+    if (!store.gameWon && !store.gameTie) {
       $('#player-turn').text(`It's your turn, ${store.player}...`)
+      actions.changePlayer()
     } else if (store.gameWon) {
-      $('#player-turn').text(`congrats ${store.player}!! you are the winner!!`)
+      $('#player-turn').text(`Congrats ${store.player}!! You are the winner!!`)
+    } else if (store.gameTie) {
+      $('#player-turn').text(`It's a stalemate! You've out matched each other...`)
     }
-    actions.changePlayer()
   }
+
   // if cell is occupied, user message displayed to choose again
   else {
     $('.message').show()

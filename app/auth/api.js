@@ -31,29 +31,39 @@ const signOut = () => {
     headers: {
       Authorization: 'Bearer ' + store.token,
     },
-  });
+  })
 }
 
 const gameStart = (data) => {
   return $.ajax({
     url: `${apiUrl}/games`,
-    method: "POST",
+    method: 'POST',
     headers: {
-      Authorization: "Bearer " + store.token,
+      Authorization: 'Bearer ' + store.token,
     },
     data,
-  });
+  })
 }
 
 const cellSelect = (data) => {
   return $.ajax({
     url: `${apiUrl}/games/${store.id}`,
-    method: "PATCH",
+    method: 'PATCH',
     headers: {
-      Authorization: "Bearer " + store.token,
+      Authorization: 'Bearer ' + store.token,
     },
     data,
-  });
+  })
+}
+
+const allGames = () => {
+  return $.ajax({
+    url: `${apiUrl}/games`,
+    method: 'GET',
+    headers: {
+      Authorization: 'Bearer ' + store.token,
+    }
+  })
 }
 
 module.exports = {
@@ -61,5 +71,6 @@ module.exports = {
   signIn,
   signOut,
   gameStart,
-  cellSelect
-}
+  cellSelect,
+  allGames
+};

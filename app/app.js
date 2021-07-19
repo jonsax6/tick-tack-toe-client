@@ -8,7 +8,9 @@ const store = require('./store')
 
 $(() => {
   store.gameWon = false
+  store.gameTie = false
   store.playing = false
+  store.gameOver = false
   $('#sign-out-button').hide()
   $('.game_row').hide()
   $("#new-game-button").hide()
