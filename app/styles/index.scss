@@ -29,6 +29,10 @@
   border: 5px solid;
 }
 
+.box-game-over {
+  background-color: rgb(99, 145, 124);
+}
+
 .grid-row {
   height: calc(100%/3)
 }
@@ -38,7 +42,7 @@
 }
 
 .sign-in {
-  // margin-top: 100px;
+  margin-top: 100px;
 }
 
 .sign-up {
@@ -62,7 +66,7 @@
   margin: auto;
 }
 
-#login-message {
+#user-message {
   margin-bottom: 30px;
 }
 

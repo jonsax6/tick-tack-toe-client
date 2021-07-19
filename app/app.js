@@ -7,10 +7,12 @@ const authEvents = require('./auth/events')
 const store = require('./store')
 
 $(() => {
-  store.player = 'X'
-  store.gameBoard = [ '', '', '', '', '', '', '', '', '' ]
+  store.gameWon = false
+  store.playing = false
   $('#sign-out-button').hide()
-  // $('.game_row').hide()
+  $('.game_row').hide()
+  $("#new-game-button").hide()
+  $('.message').hide()
   $('#sign-up-form').on('submit', authEvents.onSignUp)
   $('#sign-in-form').on('submit', authEvents.onSignIn)
   $('#sign-out-button').on('click', authEvents.onSignOut)

@@ -61,32 +61,63 @@ const onCellSelect = (event) => {
   event.preventDefault()
   // get the data from the function call object and bind to an index variable
   const index = event.data.index
-  console.log('clicked...' + index)
-  // add store.player to the box letter div
-  $(`#box-letter-${index}`).text(store.player)
-  store.gameBoard[index] = store.player
-
-  // check to see if there is a winner
-  const gameWon = actions.checkWin('X', 'O')
-
-  // create the data object for the API PATCH
-  const data = {
-    game: {
-      cell: {
-        index: index,
-        value: store.player,
-      },
-      over: gameWon,
-    },
+  // checks if a new game has been started if not, displays a user message to start a game
+  if (store.playing === false) {
+    $(".message").show();
+    $("#user-message").text('Click "New Game" to play a new game!')
   }
-  // change the player in store.player object for next turn
-  actions.changePlayer()
-  // send the data object to the API PATCH call
-  api.cellSelect(data)
-    // action for successful API PATCH
-    .then(ui.onCellSelectSuccess)
-    // action for failed API PATH
-    .catch(ui.onFailure)
+  // checks if the game has been won, if so, displays message to start a new game
+  else if (store.gameWon === true) {
+    $('.message').show()
+    $('#user-message').text('The game ended! Click "Start Game" to play again!')
+  }
+  // checks to see if the cell is empty first, if so, then execute main function body
+  else if (store.gameBoard[index] === '') {
+    $(".message").hide()
+    console.log("clicked..." + index)
+    // add store.player to the box letter div
+    $(`#box-letter-${index}`).text(store.player)
+    store.gameBoard[index] = store.player
+
+    // check to see if there is a winner
+    store.gameWon = actions.checkWin('X', 'O')
+    console.log(store.gameBoard)
+    console.log('game won? ' + store.gameWon)
+    if (store.gameWon) {
+      $('.box').addClass('box-game-over')
+      store.gameBoard = []
+      store.playing = false
+    }
+    // create the data object for the API PATCH
+    const data = {
+      game: {
+        cell: {
+          index: index,
+          value: store.player,
+        },
+        over: store.gameWon,
+      },
+    }
+    // send the data object to the API PATCH call
+    api.cellSelect(data)
+      // action for successful API PATCH
+      .then(ui.onCellSelectSuccess)
+      // action for failed API PATH
+      .catch(ui.onFailure)
+
+    // change the player in store.player object for next turn
+    actions.changePlayer()
+    if (!store.gameWon) {
+      $('#player-turn').text(`It's your turn, ${store.player}...`)
+    } else if (store.gameWon) {
+      $('#player-turn').text(`congrats ${store.player}!! you are the winner!!`)
+    }
+  }
+  // if cell is occupied, user message displayed to choose again
+  else {
+    $('.message').show()
+    $('#user-message').text('That cell is already selected! Please try again!')
+  }
 }
 
 module.exports = {
