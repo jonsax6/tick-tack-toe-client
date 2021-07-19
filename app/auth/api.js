@@ -1,12 +1,6 @@
 'use strict'
 const store = require('../store')
-let apiUrl
-
-if (window.location.hostname === "localhost") {
-  apiUrl = 'https://tic-tac-toe-api-development.herokuapp.com';
-} else {
-  apiUrl = "https://tic-tac-toe-api-production.herokuapp.com";
-}
+const { apiUrl } = require('../config')
 
 const signUp = (data) => {
   return $.ajax({

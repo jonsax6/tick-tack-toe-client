@@ -1,52 +1,57 @@
 [![General Assembly Logo](https://camo.githubusercontent.com/1a91b05b8f4d44b5bbfb83abac2b0996d8e26c92/687474703a2f2f692e696d6775722e636f6d2f6b6538555354712e706e67)](https://generalassemb.ly/education/web-development-immersive)
 
-# browser-template
+# Tick Tack Toe
 
-A template for starting front-end projects. Webpack for `require` system, build
-pipeline, and development server. Boostrap and Handlebars.js included. No
-front-end frameworks included.
+A simple tick tack toe game.  Allows users to sign-up for an account, sign-in, start and play games, and sign-out.
 
-## Installation
+## Technologies used for this app
 
-1. [Download](../../archive/main.zip) this template.
-    - **Do Not Fork And Clone**
-    - Click the "Clone or Download" button and select "Download Zip".
-1. Move to the `sei/projects` directory, then unzip the template directory with
-    `unzip /Users/<user-name>/Downloads/browser-template-main.zip`.
-1. Rename the template directory from `browser-template-main` to
-    `<project-name>-client`.
-1. Empty [`README.md`](README.md) and fill with your own content.
-1. Replace all instances of `ga-wdi-boston.browser-template` with the name of
-    your project.
-    - You can search for all instances of text in Atom by pressing
-    `commant + shift + f` on Mac or `ctrl + shift + f` on WSL.
-1. Move into the new project and `git init`.
-1. Add all of the files in your project with the command `git add --all`.
-      - **Note: This is the only time you should run this command!**
-1. Commit all of your files with the command `git commit`.
-      - Your commit title should read `Initial commit`.
-1. Install dependencies with `npm install`.
-1. Create a new repository on [github.com](https://github.com),
-    _not GitHub Enterprise_.
-1. Name the new repository with the same name used on Step 3.
-1. Follow the instructions on your new repository's setup page. For details on
-   how to push to Github, refer to the section on Github entitled **"…or push an existing
-   repository from the command line."** Further documentation can be found [here](https://help.github.com/articles/adding-an-existing-project-to-github-using-the-command-line/).
-   > **Note:** This last step will rename your default branch to **main**. This branch name will be used when deploying.
+* This app was deployed using General Assembly's basic browser template.
+* It was built using html, css and javascript.  
+* This is an SPA with no front-end framework involved (i.e. React or Angular).
+* Bootstrap was used for the styling choices.
+* The API endpoints are hosted at Heroku and managed by General Assembly.
 
-## Structure
+### development story
 
-### App
+* The app was initially planned with a wireframe:
+  
+*  ![wireframe page 1](https://i.imgur.com/SqjPoHy.jpg) 
 
-Developers should store JavaScript files in [`app`](app).
-The "manifest" or entry-point is
-[`app/app.js`](app/app.js). In general, only
-application initialization goes in this file. It's normal for developers to
-start putting all code in this file, but encourage them to break out different
-responsibilities and use the `require` syntax put references where they're
-needed.
+*  ![wireframe page 2](https://i.imgur.com/zPVvBms.jpg)
 
-### Config
+* pseudo-code was written to plan basic functionality for:
+  * sign-up form
+  * sign-in form
+  * sign-out button
+  * functions to check for game win scenarios, tie games, and change player.
+
+* js files were organized into the following structure: 
+  * events.js to handle event listener functions.
+  * ui.js to handle the changes to the ui from resulting events being triggered. 
+  * api.js to store all the ajax api call functions.
+  * actions.js to handle any miscellaneous helper functions
+* The basic game layout was scaffolded using bootstrap
+* The game layout was wired-up with the appropriate class and id element attributes.
+* All API endpoints were tested using curl scripts.
+* Sign-in, sign-out, and sign-up were coded first, all APIs were logged and verified.
+* Gameboard CSS was coded to get the basic stylings in place
+* Gameboard functionality was tested prior to API integration.
+  * clicking on cells to get the 'X' or 'O' to print to the board.
+  * error handling when game hasn't started but a cell is clicked.
+  * error handling when clicking on a cell that is already populated.
+  * error handling when clicking on the board if the game is won or tied.
+  * game-play functions coded and tested to check for a win or tie.
+  * game-play function coded and tested to change players back and forth from X to O every turn.
+  * CSS classes created for win-cases or the tie case.  Win turns board green, tie turns the board yellow.
+  * win message to user coded, tie message to user coded.
+  * during all phases of development, making sure the correct divs were hidden/show for each different page view.
+* bugs/problems usually solved with careful observation of the order of events, simplifying with console.logs, and reading error codes for guidance locating the bugs.
+
+### Unsolved problems
+
+* Tracking score for total number of games
+* change password feature
 
 Developers should set `apiUrls.production` and `apiUrls.development` in
 [`app/config.js`](app/config.js).  With

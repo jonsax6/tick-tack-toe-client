@@ -13,8 +13,9 @@ $(() => {
   store.gameOver = false
   $('#sign-out-button').hide()
   $('.game_row').hide()
-  $("#new-game-button").hide()
+  $("#start-button-container").hide()
   $('.message').hide()
+  $('#login-error').hide()
   $('#sign-up-form').on('submit', authEvents.onSignUp)
   $('#sign-in-form').on('submit', authEvents.onSignIn)
   $('#sign-out-button').on('click', authEvents.onSignOut)

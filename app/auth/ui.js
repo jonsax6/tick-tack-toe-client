@@ -11,8 +11,15 @@ const onSignUpSuccess = (response) => {
 const onFailure = (error) => {
   console.log(`Error, status: ${error.status}`)
   $('.message').show()
-  $('#user-message').text(`Error... status: ${error.status}`)
+  $("#user-message").html(`<h4>Error... status: ${error.status}</h4>`);
   $('#sign-up-form').trigger('reset')
+}
+
+const onSignInFailure = (error) => {
+  console.log(`Error, status: ${error.status}`)
+  $('#login-title').hide()
+  $('#login-error').show()
+  $('#login-error').text('Account not found.  Try another account!')
 }
 
 const onSignInSuccess = (response) => {
@@ -26,7 +33,7 @@ const onSignInSuccess = (response) => {
   $('#sign-up').hide()
   $('#sign-out-button').show()
   $('.game_row').show()
-  $('#new-game-button').show()
+  $("#start-button-container").show();
 
 }
 
@@ -36,10 +43,8 @@ const onSignOutSuccess = () => {
   $('#user-message').text(`Thank you for playing!... Until next time.`)
   $('#sign-in').show()
   $('#sign-up').show()
-  $('#sign-out-button').hide()
-  // await setTimeout($('user-message').hide(), 5000)
   $('.game_row').hide()
-  $('#new-game-button').hide()
+  $("#start-button-container").hide();
   $('#player-turn').hide()
   $('#sign-in-form').trigger('reset')
 }
@@ -59,6 +64,7 @@ const onGameStartSuccess = (response) => {
   $('#sign-in-form').trigger('reset')
   $('.box-letter').text('')
   $('.message').hide()
+  $('#start-button-container').hide()
   $('#game-board-title').show()
   $('.box').removeClass('box-game-over')
   $('.box').removeClass('box-game-tie')
@@ -80,7 +86,8 @@ module.exports = {
   onSignOutSuccess,
   onGameStartSuccess,
   onCellSelectSuccess,
-  onGetAllGamesSuccess
+  onGetAllGamesSuccess,
+  onSignInFailure
 }
 
 // game: cells: (9) const gameBoard = ['X', '', '', '', 'X', '', '', '', 'X']

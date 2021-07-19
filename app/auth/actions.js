@@ -40,11 +40,12 @@ const checkWin = (a, b) => {
 }
 
 const changePlayer = () => {
-  if (store.player === 'X') {
-    store.player = 'O'
-  } else {
-    store.player = 'X'
-  }
+  store.player = store.player === 'X' ? 'O' : 'X'
+  // if (store.player === 'X') {
+  //   store.player = 'O'
+  // } else {
+  //   store.player = 'X'
+  // }
 }
 
 const getAllGames = () => {

@@ -5,7 +5,7 @@
       <meta name="viewport" content="width=device-width, initial-scale=1">
 
       <!-- Do not add `link` tags-->
-      <link rel="shortcut icon" type="image/x-icon" href="./app/images/tac-icon.png">
+      <link rel="shortcut icon" type="image/png" href="./app/images/favicon.png">
 
       <!-- Do not add `script` tags-->
       <script src="public/vendor.js" type="text/javascript" charset="utf-8" defer></script>
@@ -58,7 +58,8 @@
             <div id="sign-in" class="row sign-in">
               <div class="col-6 m-auto">
                 <form id="sign-in-form">
-                  <h4>Login to Tick Tack Toe:</h4>
+                  <h4 id="login-title">Login to Tick Tack Toe:</h4>
+                  <h4 id="login-error"></h4>
                   <div class="mb-3">
                     <label for="signin-email" class="form-label">Email address</label>
                     <input name="credentials[email]" type="email" class="form-control" placeholder="email@example.com">
@@ -139,8 +140,8 @@
           </div>
           <div class="row">
             <div class="col-6 m-auto">
-              <div class="row">
-                <div class="col-3">
+              <div id="game-board-options" class="row">
+                <div id="start-button-container" class="col-3">
                   <button id="new-game-button" type="submit" class="btn btn-primary">Start Game</button>
                 </div>
                 <div id="player-turn" class="col-9"></div>

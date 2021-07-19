@@ -38,7 +38,7 @@ const onSignIn = (event) => {
   console.log(data)
   api.signIn(data)
     .then(ui.onSignInSuccess)
-    .catch(ui.onFailure)
+    .catch(ui.onSignInFailure)
 }
 
 const onSignOut = (event) => {
@@ -98,12 +98,14 @@ const onCellSelect = (event) => {
     // if there's a winner, change the board color to green, then reset game array and set playing to false
     if (store.gameWon) {
       $('.box').addClass('box-game-over')
+      $('#start-button-container').show()
       store.gameBoard = []
       store.playing = false
     }
     // if tie game, change board color to yellow, then reset game array and set playing to false
     else if (store.gameTie) {
       $('.box').addClass('box-game-tie')
+      $("#start-button-container").show();
       store.gameBoard = []
       store.playing = false
     }
