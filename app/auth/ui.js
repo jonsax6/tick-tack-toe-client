@@ -57,6 +57,7 @@ const onGameStartSuccess = (response) => {
   $('#sign-in-form').trigger('reset')
   $('.box-letter').text('')
   $('.message').hide()
+  $('#game-board-title').show()
   $('.box').removeClass('box-game-over')
   $('.box').removeClass('box-game-tie')
 

@@ -63,13 +63,15 @@ const onCellSelect = (event) => {
   const index = event.data.index
   // checks if a new game has been started if not, displays a user message to start a game
   if (store.playing === false) {
-    $(".message").show();
-    $("#user-message").text('Click "New Game" to play a new game!')
+    $("#game-board-title").hide()
+    $('.message').show()
+    $('#user-message').html('<h4>Click "New Game" to play a new game!</h4>');
   }
   // checks if the game has been won or tied, if so, displays message to start a new game
   else if (store.gameWon || store.gameTie) {
+    $("#game-board-title").hide();
     $('.message').show()
-    $('#user-message').text('The game ended! Click "Start Game" to play again!')
+    $('#user-message').html('<h4>The game ended! Click "Start Game" to play again!</h4>')
   }
   // checks to see if the cell is empty first, if so, then execute main function body
   else if (store.gameBoard[index] === '') {
@@ -134,8 +136,9 @@ const onCellSelect = (event) => {
 
   // if cell is occupied, user message displayed to choose again
   else {
+    $('#game-board-title').hide()
     $('.message').show()
-    $('#user-message').text('That cell is already selected! Please try again!')
+    $('#user-message').html('<h4>That cell is already selected! Please try again!</h4>')
   }
 }
 
