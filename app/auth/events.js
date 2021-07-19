@@ -61,6 +61,8 @@ const onCellSelect = (event) => {
   event.preventDefault()
   // get the data from the function call object and bind to an index variable
   const index = event.data.index
+  // shows the main title div in case it was hidden
+  $('#game-board-title').show()
   // checks if a new game has been started if not, displays a user message to start a game
   if (store.playing === false) {
     $("#game-board-title").hide()

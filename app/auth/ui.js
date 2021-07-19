@@ -39,6 +39,8 @@ const onSignOutSuccess = () => {
   $('#sign-out-button').hide()
   // await setTimeout($('user-message').hide(), 5000)
   $('.game_row').hide()
+  $('#new-game-button').hide()
+  $('#player-turn').hide()
   $('#sign-in-form').trigger('reset')
 }
 
