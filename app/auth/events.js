@@ -106,12 +106,12 @@ const onCellSelect = (event) => {
       .catch(ui.onFailure)
 
     // change the player in store.player object for next turn
-    actions.changePlayer()
     if (!store.gameWon) {
       $('#player-turn').text(`It's your turn, ${store.player}...`)
     } else if (store.gameWon) {
       $('#player-turn').text(`congrats ${store.player}!! you are the winner!!`)
     }
+    actions.changePlayer()
   }
   // if cell is occupied, user message displayed to choose again
   else {

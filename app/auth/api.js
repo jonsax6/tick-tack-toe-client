@@ -1,10 +1,17 @@
 'use strict'
 const store = require('../store')
+let apiUrl
+
+if (window.location.hostname === "localhost") {
+  apiUrl = 'https://tic-tac-toe-api-development.herokuapp.com';
+} else {
+  apiUrl = "https://tic-tac-toe-api-production.herokuapp.com";
+}
 
 const signUp = (data) => {
   return $.ajax({
     method: 'POST',
-    url: 'https://tic-tac-toe-api-development.herokuapp.com/sign-up',
+    url: `${apiUrl}/sign-up`,
     data
   })
 }
@@ -12,14 +19,14 @@ const signUp = (data) => {
 const signIn = (data) => {
   return $.ajax({
     method: 'POST',
-    url: 'https://tic-tac-toe-api-development.herokuapp.com/sign-in',
+    url: `${apiUrl}/sign-in`,
     data
   })
 }
 
 const signOut = () => {
   return $.ajax({
-    url: 'https://tic-tac-toe-api-development.herokuapp.com/sign-out',
+    url: `${apiUrl}/sign-out`,
     method: 'DELETE',
     headers: {
       Authorization: 'Bearer ' + store.token,
@@ -29,24 +36,24 @@ const signOut = () => {
 
 const gameStart = (data) => {
   return $.ajax({
-    url: 'https://tic-tac-toe-api-development.herokuapp.com/games',
-    method: 'POST',
+    url: `${apiUrl}/games`,
+    method: "POST",
     headers: {
-      Authorization: 'Bearer ' + store.token,
+      Authorization: "Bearer " + store.token,
     },
-    data
+    data,
   });
 }
 
 const cellSelect = (data) => {
   return $.ajax({
-    url: 'https://tic-tac-toe-api-development.herokuapp.com/games/' + store.id,
-    method: 'PATCH',
+    url: `${apiUrl}/games/${store.id}`,
+    method: "PATCH",
     headers: {
-      Authorization: 'Bearer ' + store.token,
+      Authorization: "Bearer " + store.token,
     },
-    data
-  })
+    data,
+  });
 }
 
 module.exports = {
