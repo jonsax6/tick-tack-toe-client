@@ -79,8 +79,15 @@ const onCellSelect = (event) => {
   else if (store.gameBoard[index] === '') {
     $(".message").hide()
     console.log("clicked..." + index)
-    // add store.player to the box letter div
-    $(`#box-letter-${index}`).text(store.player)
+    // pass index to the box- divs, pass store.player to the box-letter- divs and populate the html to display CSS
+    $(`#box-${index}`).removeClass(`box-O`)
+    $(`#box-${index}`).removeClass(`box-X`)
+    $(`#box-${index}`).addClass(`box-${store.player}`)
+    $(`#box-${index}`).html(
+      `<div class="row inner-box">
+        <div class="col-12 box-letter-${store.player}"></div>
+      </div>`
+    )
     // now update the store state object's gameBoard on that index in the array
     store.gameBoard[index] = store.player
 

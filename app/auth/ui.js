@@ -10,7 +10,7 @@ const onSignUpSuccess = (response) => {
 
 const onFailure = (error) => {
   console.log(`Error, status: ${error.status}`)
-  $('.message').show()
+  $('#user-message').show()
   $("#user-message").html(`<h4>Error... status: ${error.status}</h4>`);
   $('#sign-up-form').trigger('reset')
 }
@@ -18,32 +18,33 @@ const onFailure = (error) => {
 const onSignInFailure = (error) => {
   console.log(`Error, status: ${error.status}`)
   $('#login-title').hide()
-  $('#login-error').show()
-  $('#login-error').text('Account not found.  Try another account!')
+  $('#user-login-message').show()
+  $('#user-login-message').text('Account not found.  Try another account!')
 }
 
 const onSignInSuccess = (response) => {
   console.log('sign-in success')
   store.token = response.user.token
   store.user = response.user.email
-  $('.message').hide()
   $('#username-display').text(`profile: ${store.user}`)
   $('#sign-in-form').trigger('reset')
   $('#sign-in').hide()
   $('#sign-up').hide()
   $('#sign-out-button').show()
-  $('.game_row').show()
+  $('.game-row').show()
+  $('#player-turn').show()
   $("#start-button-container").show();
 
 }
 
 const onSignOutSuccess = () => {
   console.log('sign out success')
-  $('.message').show()
-  $('#user-message').text(`Thank you for playing!... Until next time.`)
+  $('#login-title').hide()
+  $('#user-login-message').show()
+  $('#user-login-message').text(`Thank you for playing!... Until next time.`)
   $('#sign-in').show()
   $('#sign-up').show()
-  $('.game_row').hide()
+  $('.game-row').hide()
   $("#start-button-container").hide();
   $('#player-turn').hide()
   $('#sign-in-form').trigger('reset')
@@ -69,6 +70,24 @@ const onGameStartSuccess = (response) => {
   $('#game-board-title').show()
   $('.box').removeClass('box-game-over')
   $('.box').removeClass('box-game-tie')
+  $('#box-0').removeClass('box-O, box-X')
+  $('#box-1').removeClass('box-O, box-X')
+  $('#box-2').removeClass('box-O, box-X')
+  $('#box-3').removeClass('box-O, box-X')
+  $('#box-4').removeClass('box-O, box-X')
+  $('#box-5').removeClass('box-O, box-X')
+  $('#box-6').removeClass('box-O, box-X')
+  $('#box-7').removeClass('box-O, box-X')
+  $('#box-8').removeClass('box-O, box-X')
+  $('#box-0').empty()
+  $('#box-1').empty()
+  $('#box-2').empty()
+  $('#box-3').empty()
+  $('#box-4').empty()
+  $('#box-5').empty()
+  $('#box-6').empty()
+  $('#box-7').empty()
+  $('#box-8').empty()
 
   store.player = 'X'
   store.playing = true

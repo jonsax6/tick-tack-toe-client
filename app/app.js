@@ -12,14 +12,14 @@ $(() => {
   store.playing = false
   store.gameOver = false
   $('#sign-out-button').hide()
-  // $('.game_row').hide()
+  $('.game-row').hide()
   $("#start-button-container").hide()
   $('.message').hide()
-  $('#login-error').hide()
+  $('#user-message').hide()
+  $('#user-login-message').hide()
 
-  $('#sign-up-form').hide()
-  $('#sign-in-form').hide()
-  $('#sign-up-form').hide()
+  $('.forms').show()
+
 
 
   $('#sign-up-form').on('submit', authEvents.onSignUp)

@@ -59,7 +59,7 @@
               <div class="col-6 m-auto">
                 <form id="sign-in-form">
                   <h4 id="login-title">Login to Tick Tack Toe:</h4>
-                  <h4 id="login-error"></h4>
+                  <h4 id="user-login-message"></h4>
                   <div class="mb-3">
                     <label for="signin-email" class="form-label">Email address</label>
                     <input name="credentials[email]" type="email" class="form-control" placeholder="email@example.com">
@@ -96,65 +96,40 @@
             </div>
           </div>
 
-          <div class="row game_row">
+          <div class="row game-row">
             <div class="row">
               <div id="game-board-title" class="col-6 m-auto"><h3>Let's Play Some Tick Tack Toe!</h3></div>
               <div id="user-message" class="col-6 m-auto message"></div>
+            </div>
+            <div id="grid-container" class="row">
+              <div class="col-10 mx-auto game-box mt-5">
+                <div class="row grid-row">
+                  <div id="box-0" class="col-4 box">
+                  </div>
+                  <div id="box-1" class="col-4 box">
+                  </div>
+                  <div id="box-2" class="col-4 box">
+                  </div>
+                </div>
+                <div class="row grid-row">
+                  <div id="box-3" class="col-4 box">
+                  </div>
+                  <div id="box-4" class="col-4 box">
+                  </div>
+                  <div id="box-5" class="col-4 box">
+                  </div>
+                </div>
+                <div class="row grid-row">
+                  <div id="box-6" class="col-4 box">
+                  </div>
+                  <div id="box-7" class="col-4 box">
+                  </div>
+                  <div id="box-8" class="col-4 box">
+                  </div>
+                </div>
+              </div>
+            </div>
 
-            </div>
-            <div class="col-10 mx-auto game_box mt-5">
-              <div class="row grid-row">
-                <div id="box-0" class="col-4 box" data-index="0">
-                  <div class="row">
-                    <div id="box-letter-0" class="col-12 box-letter-x"></div>
-                  </div>
-                </div>
-                <div id="box-1" class="col-4 box" data-index="1">
-                  <div class="row">
-                    <div id="box-letter-1" class="col-12 box-letter-x"></div>
-                  </div>
-                </div>
-                <div id="box-2" class="col-4 box" data-index="2">
-                  <div class="row">
-                    <div id="box-letter-2" class="col-12 box-letter-x"></div>
-                  </div>
-                </div>
-              </div>
-              <div class="row grid-row">
-                <div id="box-3" class="col-4 box" data-index="3">
-                  <div class="row">
-                    <div id="box-letter-3" class="col-12 box-letter-x"></div>
-                  </div>
-                </div>
-                <div id="box-4" class="col-4 box" data-index="4">
-                  <div class="row">
-                   <div id="box-letter-4" class="col-12 box-letter-x"></div>
-                  </div>
-                </div>
-                <div id="box-5" class="col-4 box" data-index="5">
-                  <div class="row">
-                    <div id="box-letter-5" class="col-12 box-letter-x"></div>
-                  </div>
-                </div>
-              </div>
-              <div class="row grid-row">
-                <div id="box-6" class="col-4 box" data-index="6">
-                  <div class="row">
-                    <div id="box-letter-6" class="col-12 box-letter-x"></div>
-                  </div>
-                </div>
-                <div id="box-7" class="col-4 box" data-index="7">
-                  <div class="row">
-                    <div id="box-letter-7" class="col-12 box-letter-x"></div>
-                  </div>
-                </div>
-                <div id="box-8" class="col-4 box" data-index="8">
-                  <div class="row">
-                    <div id="box-letter-8" class="col-12 box-letter-x"></div>
-                  </div>
-                </div>
-              </div>
-            </div>
           </div>
           <div class="row">
             <div class="col-8 m-auto">
