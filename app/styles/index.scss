@@ -4,16 +4,28 @@
 $brdr-clr-blue: rgb(50, 103, 138);
 $brdr-clr-gray: lightgrey;
 
+html, body {
+  background-color: lightgrey;
+}
+
+// .container-lg {
+//   background-color: lightgrey;
+//   min-height: 100vh;
+//   height: 100%;
+//   width: 100%;
+//   margin-left: 20px;
+//   margin-right: 20px;
+// }
 
 .container {
+  background-color: lightgrey;
   display: flex;
-  height: 100%;
+  height: 100vh;
   justify-content: center;
 }
 
 .main {
   background-color: lightgrey;
-  // height: 100vh;
   padding-top: 50px;
 }
 
