@@ -11,6 +11,7 @@ $(() => {
   store.gameTie = false
   store.playing = false
   store.gameOver = false
+  store.ai = true
   $('#sign-out-button').hide()
   $('.game-row').hide()
   $("#start-button-container").hide()

@@ -77,6 +77,7 @@ const onCellSelect = (event) => {
   }
   // checks to see if the cell is empty first, if so, then execute main function body
   else if (store.gameBoard[index] === '') {
+    
     $(".message").hide()
     console.log("clicked..." + index)
     // pass index to the box- divs, pass store.player to the box-letter- divs and populate the html to display CSS

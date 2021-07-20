@@ -12,13 +12,16 @@ const wins = [
   [ 6, 4, 2 ]
 ]
 
-const checkPlayerWin = (n) => {
+const aiPlayer = 'O'
+const humanPlayer = 'X'
+
+const checkPlayerWin = (board, n) => {
   winner = false
   wins.forEach(win => {
     if (
-      store.gameBoard[win[0]] === n &&
-      store.gameBoard[win[1]] === n &&
-      store.gameBoard[win[2]] === n
+      board[win[0]] === n &&
+      board[win[1]] === n &&
+      board[win[2]] === n
     ) {
       winner = true
     }
@@ -36,7 +39,7 @@ const checkWin = (a, b) => {
   } else if (checkPlayerWin(b)) {
     store.winner = b
   }
-  return checkPlayerWin(a) || checkPlayerWin(b)
+  return checkPlayerWin(store.gameBoard, a) || checkPlayerWin(store.gameBoard, b)
 }
 
 const changePlayer = () => {
@@ -55,61 +58,94 @@ const getAllGames = () => {
     .catch(ui.onFailure);
 }
 
-function minimax(newBoard, player) {
-  var availSpots = emptySquares();
+const emptySquares = () => {
+  let newArray = []
+  store.gameBoard.forEach((c, index) => {
+    if (c === '') {
+      newArray.push(index)
+    }
+  })
+  return newArray
+}
 
-  if (checkWin(newBoard, huPlayer)) {
-    return { score: -10 };
-  } else if (checkWin(newBoard, aiPlayer)) {
+function minimax(newBoard, player) {
+  let availSpots = emptySquares()
+
+  if (checkPlayerWin(newBoard, humanPlayer)) {
+    return { score: -10 }
+  } else if (checkPlayerWin(newBoard, aiPlayer)) {
     return { score: 10 };
   } else if (availSpots.length === 0) {
     return { score: 0 };
   }
-  var moves = [];
-  for (var i = 0; i < availSpots.length; i++) {
-    var move = {};
-    move.index = newBoard[availSpots[i]];
-    newBoard[availSpots[i]] = player;
+  let moves = []
+  for (let i = 0; i < availSpots.length; i++) {
+    let move = {}
+    move.index = newBoard[availSpots[i]]
+    newBoard[availSpots[i]] = player
 
-    if (player == aiPlayer) {
-      var result = minimax(newBoard, huPlayer);
-      move.score = result.score;
+    if (player === aiPlayer) {
+      let result = minimax(newBoard, humanPlayer)
+      move.score = result.score
     } else {
-      var result = minimax(newBoard, aiPlayer);
-      move.score = result.score;
+      let result = minimax(newBoard, aiPlayer)
+      move.score = result.score
     }
 
-    newBoard[availSpots[i]] = move.index;
+    newBoard[availSpots[i]] = move.index
 
-    moves.push(move);
+    moves.push(move)
   }
 
-  var bestMove;
+  let bestMove;
   if (player === aiPlayer) {
-    var bestScore = -10000;
-    for (var i = 0; i < moves.length; i++) {
+    let bestScore = -10000;
+    for (let i = 0; i < moves.length; i++) {
       if (moves[i].score > bestScore) {
-        bestScore = moves[i].score;
-        bestMove = i;
+        bestScore = moves[i].score
+        bestMove = i
       }
     }
   } else {
-    var bestScore = 10000;
-    for (var i = 0; i < moves.length; i++) {
+    let bestScore = 10000
+    for (let i = 0; i < moves.length; i++) {
       if (moves[i].score < bestScore) {
-        bestScore = moves[i].score;
-        bestMove = i;
+        bestScore = moves[i].score
+        bestMove = i
       }
     }
   }
 
-  return moves[bestMove];
+  return moves[bestMove]
 }
 
+const turnClick = (index) => {
+  if (store.gameBoard[index] === '') {
+    turn(index, humanPlayer);
+    if (!checkPlayerWin(store.gameBoard, humanPlayer) && !checkTie(store.gameBoard))
+      turn(bestSpot(), aiPlayer);
+  }
+}
+
+const turn = (id, player) => {
+  store.gameBoard[id] = player
+  $(`#box-${id}`).text(`${player}`)
+  let isGameWon = checkPlayerWin(store.gameBoard, player)
+  if (isGameWon) {
+    store.gameWon = true
+  }
+}
+
+
+const bestSpot = () => {
+  return minimax(store.gameBoard, aiPlayer).index
+}
 
 module.exports = {
   checkWin,
   checkTie,
   changePlayer,
-  getAllGames
+  getAllGames,
+  minimax,
+  turnClick
 }

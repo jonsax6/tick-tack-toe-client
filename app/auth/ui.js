@@ -32,7 +32,6 @@ const onSignInSuccess = (response) => {
   $('#sign-up').hide()
   $('#sign-out-button').show()
   $('.game-row').show()
-  $('#player-turn').show()
   $("#start-button-container").show();
 
 }
@@ -64,7 +63,7 @@ const onGameStartSuccess = (response) => {
   console.log(store.id)
   console.log('new game created...')
   $('#sign-in-form').trigger('reset')
-  $('.box-letter').text('')
+  $("#player-turn").show();
   $('.message').hide()
   $('#start-button-container').hide()
   $('#game-board-title').show()
