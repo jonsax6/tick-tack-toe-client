@@ -13,7 +13,7 @@ $brdr-clr-gray: lightgrey;
 
 .main {
   background-color: lightgrey;
-  height: 100vh;
+  // height: 100vh;
   padding-top: 50px;
 }
 
@@ -208,16 +208,37 @@ $brdr-clr-gray: lightgrey;
   border-radius: 100%;
   border: 6px solid black;
 }
-@media (max-width: 960px) {
+@media (max-width: 975px) {
   .game-box {
     height: 700px;
     width: 700px;
   }
 }
 
-@media (max-width: 780px) {
+@media (max-width: 775px) {
   .game-box {
     height: 600px;
     width: 600px;
+  }
+}
+
+@media (max-width: 675px) {
+  .game-box {
+    height: 500px;
+    width: 500px;
+  }
+}
+
+@media (max-width: 575) {
+  .game-box {
+    height: 400px;
+    width: 400px;
+  }
+}
+
+@media (max-width: 400) {
+  .game-box {
+    height: 300px;
+    width: 300px;
   }
 }
