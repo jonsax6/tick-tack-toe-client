@@ -1,6 +1,10 @@
 @import '~bootstrap/scss/bootstrap';
 @import url('https://fonts.googleapis.com/css2?family=Varela+Round&display=swap');
 
+$brdr-clr-blue: rgb(50, 103, 138);
+$brdr-clr-gray: lightgrey;
+
+
 .container {
   display: flex;
   height: 100%;
@@ -13,8 +17,8 @@
 }
 
 .game_box {
-  height: 600px;
-  width: 600px;
+  height: 800px;
+  width: 800px;
   background-color: lightgray;
   margin-bottom: 20px;
   border-radius: 1rem;
@@ -26,7 +30,8 @@
 
 .box {
   background-color: rgb(84, 120, 161);
-  border: 5px solid;
+  border: 2px solid;
+  display: flex;
 }
 
 .box-game-over {
@@ -84,54 +89,98 @@
 }
 
 #box-0 {
-  display: flex;
+  border-color: $brdr-clr-gray;
   border-top: none;
   border-left: none;
-  border-radius: 1rem 0 0 0;
+  border-radius: 2rem 0 0 0;
 }
 
 #box-1 {
+  border-color: $brdr-clr-gray;
   border-top: none;
 }
 
 #box-2 {
+  border-color: $brdr-clr-gray;
   border-top: none;
   border-right: none;
-    border-radius: 0 1rem 0 0;
+  border-radius: 0 2rem 0 0;
+}
 
+#box-4 {
+  border-color: $brdr-clr-gray;
 }
 
 #box-3 {
+  border-color: $brdr-clr-gray;
   border-left: none;
 }
 
 #box-5 {
+  border-color: $brdr-clr-gray;
   border-right: none;
 }
 
 #box-6 {
+  border-color: $brdr-clr-gray;
   border-bottom: none;
   border-left: none;
-  border-radius: 0 0 0 1rem;
+  border-radius: 0 0 0 2rem;
 
 }
 
 #box-7 {
+  border-color: $brdr-clr-gray;
   border-bottom: none;
 }
 
 #box-8 {
+  border-color: $brdr-clr-gray;
   border-bottom: none;
   border-right: none;
-  border-radius: 0 0 1rem 0;
+  border-radius: 0 0 2rem 0;
 }
 
-.box-letter {
+.box-letter-x {
   position: relative;
-  top: 30px;
-  left: 45px;
-  height: 75%;
-  width: 75%;
+  // top: 135px;
+  // right: 10px;
+  // height: 75%;
+  // width: 75%;
   font-family: 'Varela Round';
-  font-size: 100px;
+  font-size: 175px;
+  height: 100%; /* this can be anything */
+  width: 100%;  /* ...but maintain 1:1 aspect ratio */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.box-letter-x::before,
+.box-letter-x::after {
+  position: absolute;
+  content: '';
+  width: 100%;
+  height: 4px;
+  background-color: black;
+}
+
+.box-letter-x::before {
+  transform: rotate(45deg);
+}
+
+.box-letter-x::after {
+  transform: rotate(-45deg);
+}
+
+.box-letter-x {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+
+  border-radius: 100%;
+  border: solid;
 }

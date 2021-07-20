@@ -67,13 +67,13 @@ const onCellSelect = (event) => {
   if (store.playing === false) {
     $("#game-board-title").hide()
     $('.message').show()
-    $('#user-message').html('<h4>Click "New Game" to play a new game!</h4>');
+    $('#user-message').html('<h4>Click "Start Game" below to play a new game!</h4>')
   }
   // checks if the game has been won or tied, if so, displays message to start a new game
   else if (store.gameWon || store.gameTie) {
     $("#game-board-title").hide();
     $('.message').show()
-    $('#user-message').html('<h4>The game ended! Click "Start Game" to play again!</h4>')
+    $('#user-message').html('<h4>The game ended! Click "Start Game" below to play again!</h4>')
   }
   // checks to see if the cell is empty first, if so, then execute main function body
   else if (store.gameBoard[index] === '') {
@@ -129,8 +129,8 @@ const onCellSelect = (event) => {
 
     // change the player in store.player object for next turn
     if (!store.gameWon && !store.gameTie) {
+      actions.changePlayer();
       $('#player-turn').text(`It's your turn, ${store.player}...`)
-      actions.changePlayer()
     } else if (store.gameWon) {
       $('#player-turn').text(`Congrats ${store.player}!! You are the winner!!`)
     } else if (store.gameTie) {

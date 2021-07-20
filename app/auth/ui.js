@@ -47,6 +47,7 @@ const onSignOutSuccess = () => {
   $("#start-button-container").hide();
   $('#player-turn').hide()
   $('#sign-in-form').trigger('reset')
+  $('#sign-out-button').hide()
 }
 
 const onGetAllGamesSuccess = (response) => {
@@ -71,7 +72,7 @@ const onGameStartSuccess = (response) => {
 
   store.player = 'X'
   store.playing = true
-  $("#player-turn").text("It's your turn, " + store.player)
+  $('#player-turn').text(`It's your turn, ${store.player}...`)
   // actions.getAllGames()
 }
 
