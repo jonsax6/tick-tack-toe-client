@@ -28,10 +28,14 @@
                 </li>
               </ul>
               <!-- sign-out button -->
-              <button id="sign-out-button" type="submit" class="btn btn-secondary">Sign Out</button>
+              <span id="games-title" class="navbar-text mr-5">
+                <span>Games Played:</span>
+                <span id="total-games-played">-</span>
+              </span>
+              <span class="spacer-20"></span>
               <span class="spacer-20"></span>
               <span id="score-title" class="navbar-text mr-5">
-                <span>Score</span>
+                <span>Score:</span>
               </span>
               <span class="spacer-20"></span>
               <span id="x-score" class="navbar-text mr-5">
@@ -43,6 +47,8 @@
                 <span class="score-heading"><strong>O</strong></span>
                 <span id="o-wins" class="score-points">-</span>
               </span>
+              <span class="spacer-20"></span>
+              <button id="sign-out-button" type="submit" class="btn btn-secondary border-3 border-warning">Sign Out</button>
             </div>
           </div>
         </nav>

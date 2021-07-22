@@ -41,6 +41,8 @@ const onSignInSuccess = (response) => {
   $('#sign-up').hide()
   $('#x-score').show()
   $('#o-score').show()
+  $('#games-title').show()
+  $('#total-games-played').show()
   $('.forms').hide()
   $('#score-title').show()
   $('#sign-out-button').show()
@@ -63,6 +65,8 @@ const onSignOutSuccess = () => {
   $('#score-title').hide()
   $('#player-turn').empty()
   $('#login-title').hide()
+  $('#games-title').hide()
+  $('#total-games-played').hide()
   $('#user-login-message').show()
   $('#user-login-message').text(`Thank you for playing! Until next time...`)
   $('#sign-in').show()
@@ -79,7 +83,8 @@ const onSignOutSuccess = () => {
 const onGetAllGamesSuccess = (response) => {
   let xWins = []
   let oWins = []
-  response.games.forEach(game => {
+  const games = response.games
+  games.forEach(game => {
     let oldBoard = game.cells
     if (actions.playerWins(oldBoard, 'X')) {
       xWins.push(oldBoard)
@@ -88,10 +93,11 @@ const onGetAllGamesSuccess = (response) => {
     }
   })
   $('#x-wins').text(`${xWins.length}`)
-  $("#o-wins").text(`${oWins.length}`)
-
+  $('#o-wins').text(`${oWins.length}`)
+  $('#total-games-played').text(`${games.length}`)
   console.log(xWins.length)
   console.log(oWins.length)
+  console.log(games)
 }
 
 const onGetAllGamesFailure = (error) => {

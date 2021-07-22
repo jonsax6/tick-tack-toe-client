@@ -26,6 +26,8 @@ $(() => {
   $('#x-score').hide()
   $("#o-score").hide()
   $('#score-title').hide()
+  $('#games-title').hide()
+  $('#total-games-played').hide()
   $('#sign-up-form').on('submit', authEvents.onSignUp)
   $('#sign-in-form').on('submit', authEvents.onSignIn)
   $('#sign-out-button').on('click', authEvents.onSignOut)
