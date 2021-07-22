@@ -120,6 +120,14 @@ html, body {
 //   background-color: rgb(84, 120, 161);
 // }
 
+#sign-out-button {
+  border: solid 2px $gray-500;
+}
+
+#sign-out-button:hover {
+  border-color: $warning;
+}
+
 #game-board-options {
   margin-bottom: 100px;
   padding-left: 25px;
