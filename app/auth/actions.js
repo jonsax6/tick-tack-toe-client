@@ -42,11 +42,6 @@ const checkWin = (board, a, b) => {
 
 const changePlayer = () => {
   store.player = store.player === 'X' ? 'O' : 'X'
-  // if (store.player === 'X') {
-  //   store.player = 'O'
-  // } else {
-  //   store.player = 'X'
-  // }
 }
 
 const getAllGames = () => {
@@ -116,10 +111,13 @@ const edgeCases = [
 const blockMove = [2,0,1,5,3,4,8,6,7,6,0,3,7,1,4,8,2,5,8,0,4,6,2,4]
 
 const findBlockingMove = (board) => {
+  // if there's no move to block, return null
   let move = null
+  // check each edge case, see if those indexes are in the main board array...
   edgeCases.forEach((ec, index) => {
     if (board[ec[0]] === 'X' && board[ec[1]] === 'X') {
-      move = blockMove[index]
+      // if so, then place the blockMove with corresponding index.
+      move = blockMove[index];
     }
   })
   return move
