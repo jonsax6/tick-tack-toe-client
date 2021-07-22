@@ -46,6 +46,14 @@ const onGameStart = (event) => {
     .catch(ui.onFailure)
 }
 
+const onGetGames = (event) => {
+  event.preventDefault()
+  const id = store.id
+  api.allGames()
+    .then(ui.onGetAllGamesSuccess)
+    .catch(ui.onGetAllGamesFailure)
+}
+
 const onCellSelect = (event) => {
   event.preventDefault()
   // get the data from the function call object and bind to an index variable
@@ -66,7 +74,7 @@ const onCellSelect = (event) => {
   }
   // checks to see if the cell is empty first, if so, then execute main function body
   else if (store.gameBoard[index] === '') {
-    
+
     $(".message").hide()
     console.log("clicked..." + index)
 
@@ -113,5 +121,6 @@ module.exports = {
   onSignIn,
   onSignOut,
   onGameStart,
-  onCellSelect
+  onCellSelect,
+  onGetGames
 }

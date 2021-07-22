@@ -52,7 +52,7 @@ const cellSelect = (data) => {
 
 const allGames = () => {
   return $.ajax({
-    url: `${apiUrl}/games`,
+    url: `${apiUrl}/games/`,
     method: 'GET',
     headers: {
       Authorization: 'Bearer ' + store.token,

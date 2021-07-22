@@ -1,6 +1,7 @@
 'use strict'
 const store = require('../store')
 const actions = require('./actions')
+const events = require('./events')
 
 const onSignUpSuccess = (response) => {
   console.log('Sign-up success!')
@@ -65,7 +66,25 @@ const onSignOutSuccess = () => {
 }
 
 const onGetAllGamesSuccess = (response) => {
-  console.log(response)
+  let xWins = []
+  let oWins = []
+  response.games.forEach(game => {
+    let oldBoard = game.cells
+    if (actions.checkPlayerWin(oldBoard, 'X')) {
+      xWins.push(oldBoard);
+    } else if (actions.checkPlayerWin(oldBoard, 'O')) {
+      oWins.push(oldBoard);
+    }
+  })
+  $('#x-wins').text(`${xWins.length}`)
+  $("#o-wins").text(`${oWins.length}`);
+
+  console.log(xWins.length)
+  console.log(oWins.length)
+}
+
+const onGetAllGamesFailure = (error) => {
+  console.log(error)
 }
 
 const onGameStartSuccess = (response) => {
@@ -121,6 +140,7 @@ module.exports = {
   onGameStartSuccess,
   onCellSelectSuccess,
   onGetAllGamesSuccess,
+  onGetAllGamesFailure,
   onSignInFailure
 }
 

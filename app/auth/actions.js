@@ -241,6 +241,8 @@ const cellSelectApi = (i) => {
     },
   };
   // send the data object to the API PATCH call
+  console.log(data)
+  console.log(store.token)
   api
     .cellSelect(data)
     // action for successful API PATCH
@@ -252,6 +254,7 @@ const cellSelectApi = (i) => {
 // if none result in win or loss, then choose randomly.
 module.exports = {
   checkWin,
+  checkPlayerWin,
   checkTie,
   changePlayer,
   getAllGames,
