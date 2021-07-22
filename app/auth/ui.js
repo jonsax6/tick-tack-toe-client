@@ -6,6 +6,14 @@ const onSignUpSuccess = (response) => {
   console.log('Sign-up success!')
   $('#sign-up-form').trigger('reset')
   $('#sign-up').hide()
+  $('#login-title').text('Thank you! You can sign-in now...')
+  $('#sign-up-error').hide()
+  $('#sign-up-welcome').show()
+}
+
+const onSignUpFailure = () => {
+  $('#sign-up-error').show()
+  $('#sign-up-welcome').hide()
 }
 
 const onFailure = (error) => {
@@ -32,12 +40,16 @@ const onSignInSuccess = (response) => {
   $('#sign-up').hide()
   $('#sign-out-button').show()
   $('.game-row').show()
-  $("#start-button-container").show();
-
+  $('#player-turn').show()
+  $('#start-button-container').show()
+  $('#sign-up-error').hide()
+  $('#sign-up-welcome').show()
 }
 
 const onSignOutSuccess = () => {
   console.log('sign out success')
+  $('.box').empty()
+  $('#player-turn').empty()
   $('#login-title').hide()
   $('#user-login-message').show()
   $('#user-login-message').text(`Thank you for playing!... Until next time.`)
@@ -48,6 +60,8 @@ const onSignOutSuccess = () => {
   $('#player-turn').hide()
   $('#sign-in-form').trigger('reset')
   $('#sign-out-button').hide()
+  store.gameBoard = []
+  store.playing = false
 }
 
 const onGetAllGamesSuccess = (response) => {
@@ -100,6 +114,7 @@ const onCellSelectSuccess = () => {
 
 module.exports = {
   onSignUpSuccess,
+  onSignUpFailure,
   onFailure,
   onSignInSuccess,
   onSignOutSuccess,

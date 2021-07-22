@@ -11,18 +11,15 @@ $(() => {
   store.gameTie = false
   store.playing = false
   store.gameOver = false
-  store.ai = true
+  store.ai = false
   $('#sign-out-button').hide()
   $('.game-row').hide()
   $("#start-button-container").hide()
   $('.message').hide()
   $('#user-message').hide()
   $('#user-login-message').hide()
-
+  $('#sign-up-error').hide()
   $('.forms').show()
-
-
-
   $('#sign-up-form').on('submit', authEvents.onSignUp)
   $('#sign-in-form').on('submit', authEvents.onSignIn)
   $('#sign-out-button').on('click', authEvents.onSignOut)

@@ -13,21 +13,10 @@ const onSignUp = (event) => {
   const form = event.target
   const data = getFormFields(form)
 
-  // to be used later for auto sign-in
-  // const email = data.credentials.email
-  // const password = data.credentials.password
-  // const signInData = {
-  //   credentials: {
-  //     email: `${email}`,
-  //     password: `${password}`
-  //   }
-  // }
-  // console.log(signInData)
-
   // make an API call using ajax
   api.signUp(data)
     .then(ui.onSignUpSuccess)
-    .catch(ui.onFailure)
+    .catch(ui.onSignUpFailure)
 }
 
 const onSignIn = (event) => {
@@ -60,7 +49,7 @@ const onGameStart = (event) => {
 const onCellSelect = (event) => {
   event.preventDefault()
   // get the data from the function call object and bind to an index variable
-  const index = event.data.index
+  let index = event.data.index
   // shows the main title div in case it was hidden
   $('#game-board-title').show()
   // checks if a new game has been started if not, displays a user message to start a game
@@ -73,67 +62,18 @@ const onCellSelect = (event) => {
   else if (store.gameWon || store.gameTie) {
     $("#game-board-title").hide();
     $('.message').show()
-    $('#user-message').html('<h4>The game ended! Click "Start Game" below to play again!</h4>')
+    $('#user-message').html('<h5>The game ended! Click "Start Game" below to play again!</h5>')
   }
   // checks to see if the cell is empty first, if so, then execute main function body
   else if (store.gameBoard[index] === '') {
     
     $(".message").hide()
     console.log("clicked..." + index)
-    // pass index to the box- divs, pass store.player to the box-letter- divs and populate the html to display CSS
-    $(`#box-${index}`).removeClass(`box-O`)
-    $(`#box-${index}`).removeClass(`box-X`)
-    $(`#box-${index}`).addClass(`box-${store.player}`)
-    $(`#box-${index}`).html(
-      `<div class="row inner-box">
-        <div class="col-12 box-letter-${store.player}"></div>
-      </div>`
-    )
-    // now update the store state object's gameBoard on that index in the array
-    store.gameBoard[index] = store.player
 
-    // now check to see if there is a winner and save result to store.gameWon
-    store.gameWon = actions.checkWin('X', 'O')
-
-    // then check to see if there is a tie game and save result to store.gameTie
-    store.gameTie = actions.checkTie(store.gameBoard)
-
-    // checks if either win or tie is true, then changes gameOver to true if either returns true
-    if (store.gameWon || store.gameTie) {
-      store.gameOver = true
-    }
-
-    // if there's a winner, change the board color to green, then reset game array and set playing to false
-    if (store.gameWon) {
-      $('.box').addClass('box-game-over')
-      $('#start-button-container').show()
-      store.gameBoard = []
-      store.playing = false
-    }
-    // if tie game, change board color to yellow, then reset game array and set playing to false
-    else if (store.gameTie) {
-      $('.box').addClass('box-game-tie')
-      $("#start-button-container").show();
-      store.gameBoard = []
-      store.playing = false
-    }
-
-    // now create the data object for the API PATCH
-    const data = {
-      game: {
-        cell: {
-          index: index,
-          value: store.player,
-        },
-        over: store.gameOver,
-      },
-    }
-    // send the data object to the API PATCH call
-    api.cellSelect(data)
-      // action for successful API PATCH
-      .then(ui.onCellSelectSuccess)
-      // action for failed API PATH
-      .catch(ui.onFailure)
+    // initiate the cell change to 'X' or 'O', update state objects, checkWin, checkTie, change board color, change playing status
+    actions.cellFlip(index)
+    // make the API call
+    actions.cellSelectApi(index)
 
     // change the player in store.player object for next turn
     if (!store.gameWon && !store.gameTie) {
@@ -143,6 +83,20 @@ const onCellSelect = (event) => {
       $('#player-turn').text(`Congrats ${store.player}!! You are the winner!!`)
     } else if (store.gameTie) {
       $('#player-turn').text(`It's a stalemate! You've out matched each other...`)
+    }
+    if (store.ai && store.player === 'O') {
+      // execute an AI turn here
+      console.log(store.gameBoard)
+      index = actions.aiTurn(store.gameBoard)
+      console.log(index)
+      console.log(store.gameBoard)
+      actions.cellFlip(index)
+      actions.cellSelectApi(index)
+      // console.log("the board after ai move is: " + store.gameBoard)
+      // console.log("the player before change is: " + store.player);
+
+      actions.changePlayer()
+      // console.log("the player after change is: " + store.player);
     }
   }
 
