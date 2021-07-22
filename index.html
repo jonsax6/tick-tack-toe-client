@@ -47,109 +47,124 @@
           </div>
         </nav>
         <div class="row main">
-          <!-- login message -->
-          <!-- <div class="row message">
-            <div id="message-container" class="col-6">
-              <h6 id="user-message"></h6>
-            </div>
-          </div> -->
-          <!-- login forms container -->
-          <div class="row forms">
-            <div id="sign-in" class="row sign-in">
-              <div class="col-lg-6 col-md-9 col-sm-12 m-auto">
-                <form id="sign-in-form">
-                  <h4 id="login-title">Login to Tick Tack Toe:</h4>
-                  <h4 id="user-login-message"></h4>
-                  <div class="mb-3">
-                    <label for="signin-email" class="form-label">Email address</label>
-                    <input name="credentials[email]" type="email" class="form-control" placeholder="email@example.com">
+          <div class="col-12">
+            <!-- login message -->
+            <!-- <div class="row message">
+                        <div id="message-container" class="col-6">
+                          <h6 id="user-message"></h6>
+                        </div>
+                      </div> -->
+            <!-- login forms container -->
+            <div class="row forms mt-5">
+              <div class="col-12 m-auto sign-in">
+                <div id="sign-in" class="row">
+                  <div class="col-lg-6 col-md-9 col-sm-12 m-auto rounded-3 bg-secondary bg-gradient border border-dark shadow-lg p-5">
+                    <form id="sign-in-form">
+                      <h4 id="login-title">Login to Tick Tack Toe:</h4>
+                      <h4 id="user-login-message"></h4>
+                      <div class="mb-3">
+                        <label for="signin-email" class="form-label">Email address</label>
+                        <input name="credentials[email]" type="email" class="form-control border-dark shadow"
+                          placeholder="email@example.com">
+                      </div>
+                      <div class="mb-3">
+                        <label for="signin-password" class="form-label">Password</label>
+                        <input name="credentials[password]" type="password" class="form-control border-dark shadow"
+                          placeholder="enter password">
+                      </div>
+                      <button type="submit" class="btn btn-warning border-dark shadow">Login</button>
+                    </form>
                   </div>
-                  <div class="mb-3">
-                    <label for="signin-password" class="form-label">Password</label>
-                    <input name="credentials[password]" type="password" class="form-control" placeholder="enter password">
+                </div>
+              </div>
+              <div id="sign-up" class="col-12 m-auto mt-5 sign-up">
+                <div class="row">
+                  <div class="col-lg-6 col-md-9 col-sm-12 m-auto rounded-3 bg-secondary bg-gradient border border-dark shadow-lg p-5">
+                    <form id="sign-up-form">
+                      <h4 id="sign-up-welcome">Sign up for a new account:</h4>
+                      <h4 id="sign-up-error">There was an error, try again...</h4>
+                      <div class="mb-3">
+                        <label class="form-label">Email address</label>
+                        <input name="credentials[email]" type="email" class="form-control border-dark shadow"
+                          placeholder="email@example.com">
+                        <div id="emailHelp" class="form-text text-dark">We'll never share your email with anyone else.</div>
+                      </div>
+                      <div class="mb-3">
+                        <label class="form-label">Password</label>
+                        <input name="credentials[password]" type="password" class="form-control border-dark shadow"
+                          placeholder="enter a password">
+                      </div>
+                      <div class="mb-3">
+                        <label class="form-label">Re-type Password</label>
+                        <input name="credentials[password_confirmation]" type="password" class="form-control border-dark shadow"
+                          placeholder="re-type your password">
+                      </div>
+                      <button type="submit" class="btn btn-warning border-dark shadow shadow">Register</button>
+                    </form>
                   </div>
-                  <button type="submit" class="btn btn-primary">Login</button>
-                </form>
+                </div>
               </div>
             </div>
-            <div id="sign-up" class="row sign-up">
-              <div class="col-lg-6 col-md-9 col-sm-12 m-auto">
-                <form id="sign-up-form">
-                  <h4 id="sign-up-welcome">Sign up for a new account:</h4>
-                  <h4 id="sign-up-error">There was an error, try again...</h4>
-                  <div class="mb-3">
-                    <label class="form-label">Email address</label>
-                    <input name="credentials[email]" type="email" class="form-control" placeholder="email@example.com">
-                    <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
-                  </div>
-                  <div class="mb-3">
-                    <label class="form-label">Password</label>
-                    <input name="credentials[password]" type="password" class="form-control" placeholder="enter a password">
-                  </div>
-                  <div class="mb-3">
-                    <label class="form-label">Re-type Password</label>
-                    <input name="credentials[password_confirmation]" type="password" class="form-control"
-                      placeholder="re-type your password">
-                  </div>
-                  <button type="submit" class="btn btn-primary">Register</button>
-                </form>
-              </div>
-            </div>
-          </div>
 
-          <div class="game-row">
+            <div class="game-row">
+              <div class="row">
+                <div id="game-board-title" class="col-lg-6 col-md-9 col-sm-12 m-auto">
+                  <h4>Let's Play Some Tick Tack Toe!</h4>
+                </div>
+                <div id="user-message" class="col-lg-6 col-md-9 col-sm-12 m-auto message"></div>
+              </div>
+              <div id="grid-container" class="row">
+                <div class="col-lg-10 col-sm-12 mx-auto game-box mt-5">
+                  <div class="row grid-row">
+                    <div id="box-0" class="col-4 box">
+                    </div>
+                    <div id="box-1" class="col-4 box">
+                    </div>
+                    <div id="box-2" class="col-4 box">
+                    </div>
+                  </div>
+                  <div class="row grid-row">
+                    <div id="box-3" class="col-4 box">
+                    </div>
+                    <div id="box-4" class="col-4 box">
+                    </div>
+                    <div id="box-5" class="col-4 box">
+                    </div>
+                  </div>
+                  <div class="row grid-row">
+                    <div id="box-6" class="col-4 box">
+                    </div>
+                    <div id="box-7" class="col-4 box">
+                    </div>
+                    <div id="box-8" class="col-4 box">
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
             <div class="row">
-              <div id="game-board-title" class="col-lg-6 col-md-9 col-sm-12 m-auto"><h4>Let's Play Some Tick Tack Toe!</h4></div>
-              <div id="user-message" class="col-lg-6 col-md-9 col-sm-12 m-auto message"></div>
-            </div>
-            <div id="grid-container" class="row">
-              <div class="col-lg-10 col-sm-12 mx-auto game-box mt-5">
-                <div class="row grid-row">
-                  <div id="box-0" class="col-4 box">
-                  </div>
-                  <div id="box-1" class="col-4 box">
-                  </div>
-                  <div id="box-2" class="col-4 box">
-                  </div>
-                </div>
-                <div class="row grid-row">
-                  <div id="box-3" class="col-4 box">
-                  </div>
-                  <div id="box-4" class="col-4 box">
-                  </div>
-                  <div id="box-5" class="col-4 box">
-                  </div>
-                </div>
-                <div class="row grid-row">
-                  <div id="box-6" class="col-4 box">
-                  </div>
-                  <div id="box-7" class="col-4 box">
-                  </div>
-                  <div id="box-8" class="col-4 box">
-                  </div>
-                </div>
-              </div>
-            </div>
-
-          </div>
-          <div class="row">
-            <div class="col-8 m-auto">
-              <div id="game-board-options" class="row">
-                <div id="start-button-container" class="col-lg-6 col-sm-12">
-                  <div class="row">
-                    <div class="col-6">
-                      <button id="new-game-button" type="submit" class="btn btn-primary">Start Game</button>
-                    </div>
-                    <div class="col-6">
-                      <button id="get-all-games" type="submit" class="btn btn-primary">Past Games</button>
+              <div class="col-8 m-auto">
+                <div id="game-board-options" class="row">
+                  <div id="start-button-container" class="col-lg-6 col-sm-12">
+                    <div class="row">
+                      <div class="col-6">
+                        <button id="new-game-button" type="submit" class="btn btn-warning border-dark shadow shadow">Start
+                          Game</button>
+                      </div>
+                      <div class="col-6">
+                        <button id="get-all-games" type="submit" class="btn btn-warning border-dark shadow shadow">Past
+                          Games</button>
+                      </div>
                     </div>
                   </div>
+                  <div id="player-turn" class="col-lg-6 col-sm-12"></div>
                 </div>
-                <div id="player-turn" class="col-lg-6 col-sm-12"></div>
-              </div>
 
+              </div>
             </div>
           </div>
+
         </div>
 
       </div>

@@ -3,9 +3,10 @@
 
 $brdr-clr-blue: rgb(50, 103, 138);
 $brdr-clr-gray: lightgrey;
+$clr-dark-gr-red: rgb(192, 178, 123);
 
 html, body {
-  background-color: lightgrey;
+  background-color: $clr-dark-gr-red;
 }
 
 // .container-lg {
@@ -18,25 +19,29 @@ html, body {
 // }
 
 .container {
-  background-color: lightgrey;
+  background-color: $clr-dark-gr-red;
   display: flex;
   height: 100vh;
   justify-content: center;
 }
 
 .main {
-  background-color: lightgrey;
+  background-color: $clr-dark-gr-red;
   padding-top: 50px;
 }
 
 .game-box {
   height: 800px;
   width: 800px;
-  background-color: lightgray;
+  background-color: $clr-dark-gr-red;
   margin-bottom: 20px;
   margin-left: auto;
   margin-right: auto;
   border-radius: 1rem;
+}
+
+.form-control {
+  background: $gray-300;
 }
 
 .grid-container {
@@ -46,6 +51,7 @@ html, body {
 
 .game-row {
     align-content: center;
+    margin-top: 50px;
 }
 
 .box {
@@ -66,11 +72,11 @@ html, body {
 }
 
 .box-game-over {
-  background-color: rgb(99, 145, 124);
+  background-color: rgb(56, 131, 107);
 }
 
 .box-game-tie {
-  background-color: rgb(211, 190, 71);
+  background-color: $gray-600;
 }
 
 .grid-row {
@@ -120,40 +126,40 @@ html, body {
 }
 
 #box-0 {
-  border-color: $brdr-clr-gray;
+  border-color: $clr-dark-gr-red;
   border-top: none;
   border-left: none;
   border-radius: 2rem 0 0 0;
 }
 
 #box-1 {
-  border-color: $brdr-clr-gray;
+  border-color: $clr-dark-gr-red;
   border-top: none;
 }
 
 #box-2 {
-  border-color: $brdr-clr-gray;
+  border-color: $clr-dark-gr-red;
   border-top: none;
   border-right: none;
   border-radius: 0 2rem 0 0;
 }
 
 #box-4 {
-  border-color: $brdr-clr-gray;
+  border-color: $clr-dark-gr-red;
 }
 
 #box-3 {
-  border-color: $brdr-clr-gray;
+  border-color: $clr-dark-gr-red;
   border-left: none;
 }
 
 #box-5 {
-  border-color: $brdr-clr-gray;
+  border-color: $clr-dark-gr-red;
   border-right: none;
 }
 
 #box-6 {
-  border-color: $brdr-clr-gray;
+  border-color: $clr-dark-gr-red;
   border-bottom: none;
   border-left: none;
   border-radius: 0 0 0 2rem;
@@ -161,12 +167,12 @@ html, body {
 }
 
 #box-7 {
-  border-color: $brdr-clr-gray;
+  border-color: $clr-dark-gr-red;
   border-bottom: none;
 }
 
 #box-8 {
-  border-color: $brdr-clr-gray;
+  border-color: $clr-dark-gr-red;
   border-bottom: none;
   border-right: none;
   border-radius: 0 0 2rem 0;
@@ -198,8 +204,8 @@ html, body {
   position: absolute;
   content: '';
   width: 100%;
-  height: 6px;
-  background-color: black;
+  height: 8px;
+  background-color: $clr-dark-gr-red;
 }
 
 .box-letter-X::before {
@@ -219,7 +225,7 @@ html, body {
   width: 100%;
 
   border-radius: 100%;
-  border: 6px solid black;
+  border: 8px solid $clr-dark-gr-red;
 }
 @media (max-width: 975px) {
   .game-box {
