@@ -81,14 +81,14 @@ const onGetAllGamesSuccess = (response) => {
   let oWins = []
   response.games.forEach(game => {
     let oldBoard = game.cells
-    if (actions.checkPlayerWin(oldBoard, 'X')) {
-      xWins.push(oldBoard);
-    } else if (actions.checkPlayerWin(oldBoard, 'O')) {
-      oWins.push(oldBoard);
+    if (actions.playerWins(oldBoard, 'X')) {
+      xWins.push(oldBoard)
+    } else if (actions.playerWins(oldBoard, 'O')) {
+      oWins.push(oldBoard)
     }
   })
   $('#x-wins').text(`${xWins.length}`)
-  $("#o-wins").text(`${oWins.length}`);
+  $("#o-wins").text(`${oWins.length}`)
 
   console.log(xWins.length)
   console.log(oWins.length)

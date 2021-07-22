@@ -13,7 +13,7 @@ const wins = [
   [ 6, 4, 2 ]
 ]
 
-const checkPlayerWin = (board, n) => {
+const playerWins = (board, n) => {
   winner = false
   wins.forEach(win => {
     if (
@@ -34,14 +34,14 @@ const checkTie = (board) => {
 
 const checkWin = (board, a, b) => {
   // if player A wins (true) set the state object store.winner to a
-  if (checkPlayerWin(board, a)) {
+  if (playerWins(board, a)) {
     store.winner = a
     // if player B wins, set state object
-  } else if (checkPlayerWin(board, b)) {
-    store.winner = b
+  } else if (playerWins(board, b)) {
+    store.winner = b;
   }
   // if either is the winner, return true for the game
-  return checkPlayerWin(board, a) || checkPlayerWin(board, b)
+  return playerWins(board, a) || playerWins(board, b);
 }
 
 const changePlayer = () => {
@@ -140,7 +140,7 @@ const findAiWin = (board) => {
     // try placing an 'O' at indexes from availCells
     tempBoard[cell] = 'O'
     // then check for win using checkWin
-    let cellWin = checkPlayerWin(tempBoard, 'O')
+    let cellWin = playerWins(tempBoard, "O");
     // if a cell placement wins, update store.gameBoard and store.gameWon then save cell to location variable and return that index
     if (cellWin) {
       store.gameBoard[cell] = 'O'
@@ -259,11 +259,11 @@ const cellSelectApi = (i) => {
 // if none result in win or loss, then choose randomly.
 module.exports = {
   checkWin,
-  checkPlayerWin,
+  playerWins,
   checkTie,
   changePlayer,
   getAllGames,
   aiTurn,
   cellFlip,
   cellSelectApi,
-}
+};
