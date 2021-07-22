@@ -28,15 +28,19 @@ const checkPlayerWin = (board, n) => {
 }
 
 const checkTie = (board) => {
+  // if no empty cells, it's a tie
   return board.every(cell => cell !== '')
 }
 
 const checkWin = (board, a, b) => {
+  // if player A wins (true) set the state object store.winner to a
   if (checkPlayerWin(board, a)) {
     store.winner = a
+    // if player B wins, set state object
   } else if (checkPlayerWin(board, b)) {
     store.winner = b
   }
+  // if either is the winner, return true for the game
   return checkPlayerWin(board, a) || checkPlayerWin(board, b)
 }
 
@@ -125,23 +129,26 @@ const findBlockingMove = (board) => {
 
 const findAiWin = (board) => {
   let location = null
+  // find all available cells and save to an array
   const availCells = emptyCells(board)
+  // bind the existing board to a local variable
   const currentBoard = board
 
   for (const cell of availCells) {
-    // create a new temp variable based on the local copy
+    // create a new temp variable based on the local copy using the ...spread so the original doesn't get changed.
     let tempBoard = [...currentBoard]
     // try placing an 'O' at indexes from availCells
     tempBoard[cell] = 'O'
     // then check for win using checkWin
     let cellWin = checkPlayerWin(tempBoard, 'O')
-    // if a cell placement wins, update store.gameBoard and store.gameWon then save cell to location variable
+    // if a cell placement wins, update store.gameBoard and store.gameWon then save cell to location variable and return that index
     if (cellWin) {
       store.gameBoard[cell] = 'O'
       location = cell
       return location
     }
   }
+  // if no win is achieved, return null
   return location
 }
 

@@ -50,6 +50,7 @@ const onSignInSuccess = (response) => {
 const onSignOutSuccess = () => {
   console.log('sign out success')
   $('.box').empty()
+  $('#username-display').empty()
   $('#player-turn').empty()
   $('#login-title').hide()
   $('#user-login-message').show()
