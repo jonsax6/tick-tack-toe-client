@@ -116,7 +116,9 @@ const onCellSelect = (event) => {
       $('#player-turn').hide()
       $('#game-board-title-text').text(`${store.player} Wins! Click 'start game' to play again.`)
     } else if (store.gameTie) {
-      $('#player-turn').text(`It's a stalemate! You've out matched each other...`)
+      $('#player-turn').hide()
+      $('#game-board-title-text').text(`It's a stalemate! Click 'start game' to play again.`)
+
     }
     if (store.ai && store.player === 'O') {
       // execute an AI turn here
