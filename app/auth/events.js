@@ -48,10 +48,34 @@ const onGameStart = (event) => {
 
 const onGetGames = (event) => {
   event.preventDefault()
-  const id = store.id
   api.allGames()
     .then(ui.onGetAllGamesSuccess)
     .catch(ui.onGetAllGamesFailure)
+}
+
+const cellSelectApi = (i) => {
+  // create the data object for the API PATCH
+  const data = {
+    game: {
+      cell: {
+        index: i,
+        value: store.player,
+      },
+      over: store.gameOver,
+    },
+  }
+  // send the data object to the API PATCH call
+  console.log(data)
+  console.log(store.token)
+  api
+    .cellSelect(data)
+    // action for successful API PATCH
+    .then(ui.onCellSelectSuccess)
+    // .then(api.allGames)
+    // .then(ui.onGetAllGamesSuccess)
+
+    // action for failed API PATH
+    .catch(ui.onFailure)
 }
 
 const onCellSelect = (event) => {
@@ -72,6 +96,7 @@ const onCellSelect = (event) => {
     $('.message').show()
     $('#user-message').html('<h5>The game ended! Click "Start Game" below to play again!</h5>')
   }
+
   // checks to see if the cell is empty first, if so, then execute main function body
   else if (store.gameBoard[index] === '') {
 
@@ -81,14 +106,15 @@ const onCellSelect = (event) => {
     // initiate the cell change to 'X' or 'O', update state objects, checkWin, checkTie, change board color, change playing status
     actions.cellFlip(index)
     // make the API call
-    actions.cellSelectApi(index)
+    cellSelectApi(index)
 
     // change the player in store.player object for next turn
     if (!store.gameWon && !store.gameTie) {
       actions.changePlayer();
       $('#player-turn').text(`It's your turn, ${store.player}...`)
     } else if (store.gameWon) {
-      $('#player-turn').text(`Congrats ${store.player}!! You are the winner!!`)
+      $('#player-turn').hide()
+      $('#game-board-title-text').text(`${store.player} Wins! Click 'start game' to play again.`)
     } else if (store.gameTie) {
       $('#player-turn').text(`It's a stalemate! You've out matched each other...`)
     }
@@ -99,7 +125,7 @@ const onCellSelect = (event) => {
       console.log(index)
       console.log(store.gameBoard)
       actions.cellFlip(index)
-      actions.cellSelectApi(index)
+      cellSelectApi(index)
       // console.log("the board after ai move is: " + store.gameBoard)
       // console.log("the player before change is: " + store.player);
 

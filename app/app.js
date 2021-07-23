@@ -13,9 +13,7 @@ $(() => {
   store.playing = false
   store.gameOver = false
   store.ai = false
-  store.id = '60f96a00e977a500179f4f1d'
-  // events.onGetGames()
-  $('#sign-out-button').hide()
+  $("#sign-out-btn").hide();
   $('.game-row').hide()
   $("#start-button-container").hide()
   $('.message').hide()
@@ -28,11 +26,11 @@ $(() => {
   $('#score-title').hide()
   $('#games-title').hide()
   $('#total-games-played').hide()
+  $('#player-turn').hide()
   $('#sign-up-form').on('submit', authEvents.onSignUp)
   $('#sign-in-form').on('submit', authEvents.onSignIn)
-  $('#sign-out-button').on('click', authEvents.onSignOut)
+  $("#sign-out-btn").on("click", authEvents.onSignOut);
   $('#new-game-button').on('click', authEvents.onGameStart)
-  $('#get-all-games').on('click', authEvents.onGetGames)
   $('#box-0').on('click', { index: '0' }, authEvents.onCellSelect)
   $('#box-1').on('click', { index: '1' }, authEvents.onCellSelect)
   $('#box-2').on('click', { index: '2' }, authEvents.onCellSelect)

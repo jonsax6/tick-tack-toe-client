@@ -14,7 +14,7 @@
     <body>
       <div class="container-lg">
         <!-- navbar -->
-        <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+        <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-secondary">
           <div class="container-fluid">
             <span class="navbar-brand"><img id="ttt-icon" src="app/images/tac.png">Tick Tack Toe</span>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
@@ -48,7 +48,7 @@
                 <span id="o-wins" class="score-points">-</span>
               </span>
               <span class="spacer-20"></span>
-              <button id="sign-out-button" type="submit" class="btn btn-secondary">Sign Out</button>
+              <button id="sign-out-btn" type="submit" class="btn btn-secondary nav-button">Sign Out</button>
             </div>
           </div>
         </nav>
@@ -115,9 +115,9 @@
             <div class="game-row">
               <div class="row">
                 <div id="game-board-title" class="col-lg-6 col-md-9 col-sm-12 m-auto">
-                  <h4 id="game-board-title-text" class="text-center">Let's Play Some Tick Tack Toe!</h4>
+                  <h4 id="game-board-title-text" class="text-center text-light">Let's Play Some Tick Tack Toe!</h4>
                 </div>
-                <div id="user-message" class="col-lg-6 col-md-9 col-sm-12 m-auto message"></div>
+                <div id="user-message" class="col-lg-6 col-md-9 col-sm-12 text-light m-auto message"></div>
               </div>
               <div id="grid-container" class="row">
                 <div class="col-lg-10 col-sm-12 mx-auto game-box mt-5">
@@ -150,21 +150,12 @@
 
             </div>
             <div class="row">
-              <div class="col-8 m-auto">
+              <div class="col-lg-6 col-md-9 col-sm-12 m-auto">
                 <div id="game-board-options" class="row">
-                  <div id="start-button-container" class="col-lg-6 col-sm-12">
-                    <div class="row">
-                      <div class="col-md-6 col-sm-12 m-auto">
-                        <button id="new-game-button" type="submit" class="btn btn-warning border-dark shadow shadow">Start
-                          Game</button>
-                      </div>
-                      <div class="col-md-6 col-sm-12 m-auto">
-                        <button id="get-all-games" type="submit" class="btn btn-warning border-dark shadow shadow">Past
-                          Games</button>
-                      </div>
+                    <div id="start-button-container" class="col-lg-6 col-sm-12 m-auto text-center">
+                      <button id="new-game-button" type="submit" class="btn btn-warning text-center">Start Game</button>
                     </div>
-                  </div>
-                  <div id="player-turn" class="col-lg-6 col-sm-12"></div>
+                    <div id="player-turn" class="col-lg-6 col-sm-12 text-light text-center m-auto"></div>
                 </div>
               </div>
             </div>

@@ -56,7 +56,7 @@ const getAllGames = () => {
 }
 
 
-// let gameBoard = ['X','','','','X','O','','','']
+// let gameBoard = ['X','','X','','X','O','','','']
 // let gameWon = false
 
 
@@ -131,6 +131,7 @@ const findAiWin = (board) => {
   let location = null
   // find all available cells and save to an array
   const availCells = emptyCells(board)
+  console.log('...in findAiWin... Board is: ' + availCells)
   // bind the existing board to a local variable
   const currentBoard = board
 
@@ -204,7 +205,7 @@ const cellFlip = (index) => {
     `<div class="row inner-box">
         <div class="col-12 box-letter-${store.player}"></div>
       </div>`
-  );
+  )
   // now update the store state object's gameBoard on that index in the array
   store.gameBoard[index] = store.player;
 
@@ -216,14 +217,19 @@ const cellFlip = (index) => {
 
   // checks if either win or tie is true, then changes gameOver to true if either returns true
   if (store.gameWon || store.gameTie) {
-    store.gameOver = true;
+    store.gameOver = true
   }
+
   // if there's a winner, change the board color to green, then reset game array and set playing to false
   if (store.gameWon) {
     $('.box').addClass('box-game-over')
     $('#start-button-container').show()
     store.gameBoard = []
     store.playing = false
+    console.log('api here...')
+    // api.allGames()
+    //   .then(ui.onGetAllGamesSuccess)
+    //   .catch(ui.onGetAllGamesFailure)
   }
   // if tie game, change board color to yellow, then reset game array and set playing to false
   else if (store.gameTie) {
@@ -232,28 +238,6 @@ const cellFlip = (index) => {
     store.gameBoard = []
     store.playing = false
   }
-}
-
-const cellSelectApi = (i) => {
-  // create the data object for the API PATCH
-  const data = {
-    game: {
-      cell: {
-        index: i,
-        value: store.player,
-      },
-      over: store.gameOver,
-    },
-  };
-  // send the data object to the API PATCH call
-  console.log(data)
-  console.log(store.token)
-  api
-    .cellSelect(data)
-    // action for successful API PATCH
-    .then(ui.onCellSelectSuccess)
-    // action for failed API PATH
-    .catch(ui.onFailure)
 }
 
 // if none result in win or loss, then choose randomly.
@@ -265,5 +249,4 @@ module.exports = {
   getAllGames,
   aiTurn,
   cellFlip,
-  cellSelectApi,
-};
+}

@@ -3,7 +3,7 @@
 
 $brdr-clr-blue: rgb(50, 103, 138);
 $brdr-clr-gray: lightgrey;
-$clr-dark-gr-red: rgb(192, 178, 123);
+$clr-dark-gr-red: rgb(40, 45, 58);
 
 html, body {
   background-color: $clr-dark-gr-red;
@@ -120,13 +120,21 @@ html, body {
 //   background-color: rgb(84, 120, 161);
 // }
 
-#sign-out-button {
+.nav-button {
   border: solid 2px $gray-500;
 }
 
-#sign-out-button:hover {
+.nav-button:hover {
   border-color: $warning;
-  background: rgb(176, 176, 176);
+}
+
+#new-game-button {
+  border: solid 2px $gray-500;
+}
+
+#new-game-button:hover {
+  border-color: $warning;
+  background: rgb(255, 231, 151);
 }
 
 #game-board-options {
@@ -147,9 +155,18 @@ html, body {
   border-radius: 2rem 0 0 0;
 }
 
+#box-0:hover {
+  filter: brightness(125%);
+}
+
 #box-1 {
   border-color: $clr-dark-gr-red;
   border-top: none;
+}
+
+#box-1:hover {
+  filter: brightness(125%);
+
 }
 
 #box-2 {
@@ -159,8 +176,9 @@ html, body {
   border-radius: 0 2rem 0 0;
 }
 
-#box-4 {
-  border-color: $clr-dark-gr-red;
+#box-2:hover {
+  filter: brightness(125%);
+
 }
 
 #box-3 {
@@ -168,9 +186,28 @@ html, body {
   border-left: none;
 }
 
+#box-3:hover {
+  filter: brightness(125%);
+
+}
+
+#box-4 {
+  border-color: $clr-dark-gr-red;
+}
+
+#box-4:hover {
+  filter: brightness(125%);
+
+}
+
 #box-5 {
   border-color: $clr-dark-gr-red;
   border-right: none;
+}
+
+#box-5:hover {
+  filter: brightness(125%);
+
 }
 
 #box-6 {
@@ -178,6 +215,10 @@ html, body {
   border-bottom: none;
   border-left: none;
   border-radius: 0 0 0 2rem;
+}
+
+#box-6:hover {
+  filter: brightness(125%);
 
 }
 
@@ -186,11 +227,19 @@ html, body {
   border-bottom: none;
 }
 
+#box-7:hover {
+  filter: brightness(125%);
+}
+
 #box-8 {
   border-color: $clr-dark-gr-red;
   border-bottom: none;
   border-right: none;
   border-radius: 0 0 2rem 0;
+}
+
+#box-8:hover {
+  filter: brightness(125%);
 }
 
 .inner-box {

@@ -2,6 +2,7 @@
 const store = require('../store')
 const actions = require('./actions')
 const events = require('./events')
+const api = require('./api')
 
 const onSignUpSuccess = (response) => {
   console.log('Sign-up success!')
@@ -45,12 +46,16 @@ const onSignInSuccess = (response) => {
   $('#total-games-played').show()
   $('.forms').hide()
   $('#score-title').show()
-  $('#sign-out-button').show()
+  $("#sign-out-btn").show();
   $('.game-row').show()
   $('#player-turn').show()
   $('#start-button-container').show()
   $('#sign-up-error').hide()
   $('#sign-up-welcome').show()
+  $('#player-turn').hide()
+  api.allGames()
+    .then(onGetAllGamesSuccess)
+    .catch(onGetAllGamesFailure)
 }
 
 const onSignOutSuccess = () => {
@@ -76,10 +81,11 @@ const onSignOutSuccess = () => {
   $('#sign-in').show()
   $('#sign-up').show()
   $('.game-row').hide()
-  $("#start-button-container").hide();
+  $('#start-button-container').hide()
   $('#player-turn').hide()
   $('#sign-in-form').trigger('reset')
-  $('#sign-out-button').hide()
+  $('#sign-up-form').trigger('reset')
+  $('#sign-out-btn').hide()
   store.gameBoard = []
   store.playing = false
 }
@@ -102,6 +108,8 @@ const onGetAllGamesSuccess = (response) => {
   console.log(xWins.length)
   console.log(oWins.length)
   console.log(games)
+  console.log(response)
+  console.log(store.id)
 }
 
 const onGetAllGamesFailure = (error) => {
@@ -116,6 +124,7 @@ const onGameStartSuccess = (response) => {
   store.gameOver = false
   console.log(store.id)
   console.log('new game created...')
+  $("#game-board-title-text").text(`Let's Play Some Tick Tack Toe!`)
   $('#sign-in-form').trigger('reset')
   $("#player-turn").show();
   $('.message').hide()
@@ -123,15 +132,25 @@ const onGameStartSuccess = (response) => {
   $('#game-board-title').show()
   $('.box').removeClass('box-game-over')
   $('.box').removeClass('box-game-tie')
-  $('#box-0').removeClass('box-O, box-X')
-  $('#box-1').removeClass('box-O, box-X')
-  $('#box-2').removeClass('box-O, box-X')
-  $('#box-3').removeClass('box-O, box-X')
-  $('#box-4').removeClass('box-O, box-X')
-  $('#box-5').removeClass('box-O, box-X')
-  $('#box-6').removeClass('box-O, box-X')
-  $('#box-7').removeClass('box-O, box-X')
-  $('#box-8').removeClass('box-O, box-X')
+  $('#box-0').removeClass('box-O')
+  $('#box-1').removeClass('box-O')
+  $('#box-2').removeClass('box-O')
+  $('#box-3').removeClass('box-O')
+  $('#box-4').removeClass('box-O')
+  $('#box-5').removeClass('box-O')
+  $('#box-6').removeClass('box-O')
+  $('#box-7').removeClass('box-O')
+  $('#box-8').removeClass('box-O')
+
+  $('#box-0').removeClass('box-X')
+  $('#box-1').removeClass('box-X')
+  $('#box-2').removeClass('box-X')
+  $('#box-3').removeClass('box-X')
+  $('#box-4').removeClass('box-X')
+  $('#box-5').removeClass('box-X')
+  $('#box-6').removeClass('box-X')
+  $('#box-7').removeClass('box-X')
+  $('#box-8').removeClass('box-X')
   $('#box-0').empty()
   $('#box-1').empty()
   $('#box-2').empty()
@@ -150,6 +169,11 @@ const onGameStartSuccess = (response) => {
 
 const onCellSelectSuccess = () => {
   console.log('API was pinged and board was updated!')
+  if(store.gameWon) {
+    api.allGames()
+    .then(onGetAllGamesSuccess)
+    .catch(onGetAllGamesFailure);
+  }
 }
 
 module.exports = {

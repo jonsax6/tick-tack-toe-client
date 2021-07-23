@@ -40,6 +40,7 @@ const gameStart = (data) => {
 }
 
 const cellSelect = (data) => {
+  console.log('store ID is:' + store.id)
   return $.ajax({
     url: `${apiUrl}/games/${store.id}`,
     method: 'PATCH',
@@ -51,6 +52,7 @@ const cellSelect = (data) => {
 }
 
 const allGames = () => {
+  console.log('in allGames...')
   return $.ajax({
     url: `${apiUrl}/games/`,
     method: 'GET',
