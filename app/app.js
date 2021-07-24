@@ -12,24 +12,29 @@ $(() => {
   store.gameTie = false
   store.playing = false
   store.gameOver = false
+  store.stats = false
   store.ai = false
-  $("#sign-out-btn").hide();
+  $('#sign-out-btn').hide();
   $('.game-row').hide()
-  $("#start-button-container").hide()
+  $('#start-button-container').hide()
   $('.message').hide()
   $('#user-message').hide()
   $('#user-login-message').hide()
   $('#sign-up-error').hide()
   $('.forms').show()
   $('#x-score').hide()
-  $("#o-score").hide()
+  $('#o-score').hide()
   $('#score-title').hide()
   $('#games-title').hide()
   $('#total-games-played').hide()
   $('#player-turn').hide()
+  $('#stats-table').hide()
+  $('#stats-btn').hide()
+  $('#stats-title').hide()
+  $('#stats-btn').on('click', authEvents.onToggleStats)
   $('#sign-up-form').on('submit', authEvents.onSignUp)
   $('#sign-in-form').on('submit', authEvents.onSignIn)
-  $("#sign-out-btn").on("click", authEvents.onSignOut);
+  $('#sign-out-btn').on('click', authEvents.onSignOut)
   $('#new-game-button').on('click', authEvents.onGameStart)
   $('#box-0').on('click', { index: '0' }, authEvents.onCellSelect)
   $('#box-1').on('click', { index: '1' }, authEvents.onCellSelect)

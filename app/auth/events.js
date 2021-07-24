@@ -53,6 +53,20 @@ const onGetGames = (event) => {
     .catch(ui.onGetAllGamesFailure)
 }
 
+const onToggleStats = (event) => {
+  event.preventDefault()
+  store.stats = !store.stats
+  if (store.stats) {
+    $('#stats-title').show()
+    $('#stats-table').show()
+    $('#stats-btn').text('hide games')
+  } else {
+    $('#stats-title').hide()
+    $('#stats-table').hide()
+    $('#stats-btn').text('show games')
+  }
+}
+
 const cellSelectApi = (i) => {
   // create the data object for the API PATCH
   const data = {
@@ -76,6 +90,10 @@ const cellSelectApi = (i) => {
 
     // action for failed API PATH
     .catch(ui.onFailure)
+}
+
+const onResumeGame = (event) => {
+
 }
 
 const onCellSelect = (event) => {
@@ -144,5 +162,6 @@ module.exports = {
   onSignOut,
   onGameStart,
   onCellSelect,
-  onGetGames
+  onGetGames,
+  onToggleStats
 }

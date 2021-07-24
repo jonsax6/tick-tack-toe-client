@@ -40,6 +40,20 @@ html, body {
   border-radius: 1rem;
 }
 
+#stats-title {
+  margin-top: 50px;
+}
+
+#stats-btn {
+  
+}
+
+#stats-table {
+  max-height: 500px;
+  overflow: auto;
+  margin: auto;
+}
+
 .form-control {
   background: $gray-300;
 }

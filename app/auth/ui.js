@@ -42,6 +42,7 @@ const onSignInSuccess = (response) => {
   $('#sign-up').hide()
   $('#x-score').show()
   $('#o-score').show()
+  $('#stats-btn').show()
   $('#games-title').show()
   $('#total-games-played').show()
   $('.forms').hide()
@@ -86,6 +87,9 @@ const onSignOutSuccess = () => {
   $('#sign-in-form').trigger('reset')
   $('#sign-up-form').trigger('reset')
   $('#sign-out-btn').hide()
+  $('#stats-btn').hide()
+  $('#stats-title').hide()
+  $('#stats-table').hide()
   store.gameBoard = []
   store.playing = false
 }
@@ -93,18 +97,47 @@ const onSignOutSuccess = () => {
 const onGetAllGamesSuccess = (response) => {
   let xWins = []
   let oWins = []
-  const games = response.games
-  games.forEach(game => {
-    let oldBoard = game.cells
-    if (actions.playerWins(oldBoard, 'X')) {
-      xWins.push(oldBoard)
-    } else if (actions.playerWins(oldBoard, 'O')) {
-      oWins.push(oldBoard)
+  store.games = response.games
+  store.games.forEach((game) => {
+    let oldBoard = game.cells;
+    if (actions.playerWins(oldBoard, "X")) {
+      xWins.push(oldBoard);
+    } else if (actions.playerWins(oldBoard, "O")) {
+      oWins.push(oldBoard);
     }
-  })
+  });
   $('#x-wins').text(`${xWins.length}`)
   $('#o-wins').text(`${oWins.length}`)
-  $('#total-games-played').text(`${games.length}`)
+  $('#total-games-played').text(`${store.games.length}`)
+
+  $('#stats-body').empty()
+  store.games.forEach((game, index) => {
+    let created = Date.parse(game.createdAt)
+
+    const monthsArr = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec']
+    let dateObj = new Date(created)
+    let year = dateObj.getFullYear()
+    let month = monthsArr[dateObj.getMonth()]
+    let day = dateObj.getDate()
+    let oldBoard = game.cells
+    let winner = 'none'
+    if (actions.playerWins(oldBoard, 'X')) {
+      winner = 'X won'
+    } else if (actions.playerWins(oldBoard, "O")) {
+      winner = 'O won'
+    }
+    $("#stats-body").append(
+      `
+      <tr>
+        <th scope="row">${index + 1}</th>
+        <td>${game._id}</td>
+        <td>${year} ${month} ${day}</td>
+        <td>${winner}</td>
+      </tr>
+      `
+    );
+  })
+
   console.log(xWins.length)
   console.log(oWins.length)
   console.log(games)
