@@ -39,13 +39,20 @@ html, body {
   margin-right: auto;
   border-radius: 1rem;
 }
+#games-title {
+  display: block;
+}
+
+#sign-out-btn {
+  display: block;
+}
 
 #stats-title {
   margin-top: 50px;
 }
 
 #stats-btn {
-  
+
 }
 
 #stats-table {
