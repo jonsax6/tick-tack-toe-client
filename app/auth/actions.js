@@ -203,7 +203,7 @@ const cellFlip = (index) => {
   $(`#box-${index}`).addClass(`box-${store.player}`);
   $(`#box-${index}`).html(
     `<div class="row inner-box">
-        <div class="col-12 box-letter-${store.player}"></div>
+        <div class="col-12 box-letter-${store.player} letter-scaled"></div>
       </div>`
   )
   // now update the store state object's gameBoard on that index in the array

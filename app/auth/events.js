@@ -84,23 +84,19 @@ const onCellSelect = (event) => {
   let index = event.data.index
   // shows the main title div in case it was hidden
   $('#game-board-title').show()
-  // checks if a new game has been started if not, displays a user message to start a game
-  if (store.playing === false) {
-    $("#game-board-title").hide()
-    $('.message').show()
-    $('#user-message').html('<h4>Click "Start Game" below to play a new game!</h4>')
-  }
   // checks if the game has been won or tied, if so, displays message to start a new game
-  else if (store.gameWon || store.gameTie) {
-    $("#game-board-title").hide();
-    $('.message').show()
-    $('#user-message').html('<h5>The game ended! Click "Start Game" below to play again!</h5>')
+  if (store.gameWon || store.gameTie) {
+    $('#player-turn').hide()
+    $('#game-board-title-text').html('The game ended! Click "Start Game" below!')
   }
+  // checks if a new game has been started if not, displays a user message to start a game
+  else if (store.playing === false) {
+    $('#player-turn').hide()
+    $('#game-board-title-text').html('Click "Start Game" below to play a new game!')  }
 
   // checks to see if the cell is empty first, if so, then execute main function body
   else if (store.gameBoard[index] === '') {
-
-    $(".message").hide()
+    $('#game-board-title-text').html('Game On!')
     console.log("clicked..." + index)
 
     // initiate the cell change to 'X' or 'O', update state objects, checkWin, checkTie, change board color, change playing status
@@ -111,13 +107,13 @@ const onCellSelect = (event) => {
     // change the player in store.player object for next turn
     if (!store.gameWon && !store.gameTie) {
       actions.changePlayer();
-      $('#player-turn').text(`It's your turn, ${store.player}...`)
+      $('#player-turn').text(`Player ${store.player}... It's your turn.`)
     } else if (store.gameWon) {
       $('#player-turn').hide()
       $('#game-board-title-text').text(`${store.player} Wins! Click 'start game' to play again.`)
     } else if (store.gameTie) {
       $('#player-turn').hide()
-      $('#game-board-title-text').text(`It's a stalemate! Click 'start game' to play again.`)
+      $('#game-board-title-text').text(`Stalemate! Click 'start game' to play again.`)
 
     }
     if (store.ai && store.player === 'O') {
@@ -138,9 +134,7 @@ const onCellSelect = (event) => {
 
   // if cell is occupied, user message displayed to choose again
   else {
-    $('#game-board-title').hide()
-    $('.message').show()
-    $('#user-message').html('<h4>That cell is already selected! Please try again!</h4>')
+    $('#game-board-title-text').html('That cell is already selected! Please try again!')
   }
 }
 
