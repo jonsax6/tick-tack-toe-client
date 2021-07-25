@@ -90,6 +90,7 @@ const onSignOutSuccess = () => {
   $('#stats-btn').hide()
   $('#stats-title').hide()
   $('#stats-table').hide()
+  $('#stats-btn').text('show games')
   store.gameBoard = []
   store.playing = false
 }
@@ -140,7 +141,7 @@ const onGetAllGamesSuccess = (response) => {
 
   console.log(xWins.length)
   console.log(oWins.length)
-  console.log(games)
+  console.log(store.games)
   console.log(response)
   console.log(store.id)
 }

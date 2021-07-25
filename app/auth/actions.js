@@ -22,6 +22,7 @@ const playerWins = (board, n) => {
       board[win[2]] === n
     ) {
       winner = true
+      store.winCase = win
     }
   })
   return winner
@@ -49,7 +50,6 @@ const changePlayer = () => {
 }
 
 const getAllGames = () => {
-
   api.allGames(store.token)
     .then(ui.onGetAllGamesSuccess)
     .catch(ui.onFailure);
@@ -222,7 +222,9 @@ const cellFlip = (index) => {
 
   // if there's a winner, change the board color to green, then reset game array and set playing to false
   if (store.gameWon) {
-    $('.box').addClass('box-game-over')
+    store.winCase.forEach(box => {
+      $(`#box-${box}`).addClass('box-game-over')
+    })
     $('#start-button-container').show()
     store.gameBoard = []
     store.playing = false

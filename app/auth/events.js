@@ -32,6 +32,7 @@ const onSignIn = (event) => {
 
 const onSignOut = (event) => {
   event.preventDefault()
+  store.stats = false
   console.log('...in sign-out...')
   api.signOut()
     .then(ui.onSignOutSuccess)

@@ -52,7 +52,6 @@ const cellSelect = (data) => {
 }
 
 const allGames = () => {
-  console.log('in allGames...')
   return $.ajax({
     url: `${apiUrl}/games/`,
     method: 'GET',
