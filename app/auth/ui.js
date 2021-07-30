@@ -94,8 +94,30 @@ const onSignOutSuccess = () => {
   $('#stats-table').hide()
   $('#li-ai-btn').hide()
   $('#stats-btn').text('show games')
+  $('.box').removeClass('box-game-over')
+  $('.box').removeClass('box-game-tie')
+  $('#box-0').removeClass('box-O')
+  $('#box-1').removeClass('box-O')
+  $('#box-2').removeClass('box-O')
+  $('#box-3').removeClass('box-O')
+  $('#box-4').removeClass('box-O')
+  $('#box-5').removeClass('box-O')
+  $('#box-6').removeClass('box-O')
+  $('#box-7').removeClass('box-O')
+  $('#box-8').removeClass('box-O')
+  $('#box-0').removeClass('box-X')
+  $('#box-1').removeClass('box-X')
+  $('#box-2').removeClass('box-X')
+  $('#box-3').removeClass('box-X')
+  $('#box-4').removeClass('box-X')
+  $('#box-5').removeClass('box-X')
+  $('#box-6').removeClass('box-X')
+  $('#box-7').removeClass('box-X')
+  $('#box-8').removeClass('box-X')
+  $('#play-ai-btn').text('Human')
   store.gameBoard = []
   store.playing = false
+  store.ai = false
 }
 
 const onGetAllGamesSuccess = (response) => {

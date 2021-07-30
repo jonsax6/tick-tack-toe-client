@@ -181,6 +181,7 @@ const onCellSelect = (event) => {
     if (store.ai && store.player === 'O') {
       // execute an AI turn here
       index = actions.aiTurn(store.gameBoard)
+      console.log(`the index for ai is: ${index}`)
       cellFlip(index)
       // console.log("the board after ai move is: " + store.gameBoard)
       // console.log("the player before change is: " + store.player);
