@@ -166,49 +166,79 @@ const randomCell = (cells) => {
   return cells[index]
 }
 
+const cornerTest = (board) => {
+  let number = 0
+  const availCells = emptyCells(board)
+  availCells.forEach(cell => {
+    if (cell === 2 || cell === 6 || cell === 8) {
+      number++
+    } 
+  })
+  return number
+}
+
 // now using the above helper functions let's do a full AI turn
 const aiTurn = (board) => {
   const aiWin = findAiWin(board)
   const winBlock = findBlockingMove(board)
   const availCells = emptyCells(board)
+  // test for the number of open corners
+  console.log(availCells)
+  let corners = cornerTest(board)
+  console.log(corners)
   let index
   console.log(board)
-  // console.log(store.gameBoard)
-  // console.log(aiWin)
-  // console.log(winBlock)
-  // console.log(availCells)
-  // if there are no winning moves, and no wins to block, do random cell from available
 
-  // for the first 'O' move, if center is free, take that first
-  if(board[4] === '' && store.level === 'difficult'){
+  // as the first priority, always check if there is a 'X' win to block
+  if (winBlock !== null) {
+		console.log('...in winBlock...')
+		index = winBlock
+		store.gameBoard[index] = 'O'
+		return index
+  } 
+  // if the middle is open during the second move, choose it
+  else if(board[4] === '' && store.level === 'difficult'){
     index = 4
     return index
-  // for the first 'O' move, if the center is taken, choose the first corner
+  // or, if the center is taken for first 'X' move, choose the first corner
   } else if (board[4] === 'X' && board[0] === '' && store.level === 'difficult') {
     index = 0
     return index
-  } else if (aiWin === null && winBlock === null) {
-    console.log('...in random select...')
-    // bind to index variable
-    index = randomCell(availCells)
-    // save the move to state object
-    store.gameBoard[index] = 'O'
-    return index
-  }
-  // if there is a win, make that the index
-  else if (aiWin !== null) {
-    console.log('...in aiWin...')
-    index = aiWin
-    store.gameBoard[index] = 'O'
-    return index
-  }
-  // if there is a human win to block
-  else if (winBlock !== null) {
-    console.log('...in winBlock...')
-    index = winBlock
-    store.gameBoard[index] = 'O'  
-    return index
-  }
+  } 
+  // if 'X' has middle and 'O' has one corner, take another corner
+  else if (
+		board[4] === 'X' &&
+		board[0] === 'O' &&
+		(board[2] === '' || board[6] === '' || board[8] === '') &&
+		corners >= 2 &&
+		store.level === 'difficult'
+	) {
+		// this series returns the first open corner if directly above is true
+		if (board[2] === '') {
+			index = 2
+			return index
+		} else if (board[6] === '') {
+			index = 6
+			return index
+		} else {
+			index = 8
+			return index
+		}
+	} else if (aiWin !== null) {
+		console.log('...in aiWin...')
+		index = aiWin
+		store.gameBoard[index] = 'O'
+		return index
+	}
+	// if no aiWin or no winBlock moves available, then just pick randomly
+	else {
+		console.log('...in random select...')
+		// bind to index variable
+		index = randomCell(availCells)
+		// save the move to state object
+		store.gameBoard[index] = 'O'
+		return index
+	}
 }
 
 module.exports = {
