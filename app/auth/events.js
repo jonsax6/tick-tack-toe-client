@@ -88,7 +88,7 @@ const onToggleLevel = (event) => {
   }
 }
 
-const cellFlip = (index) => {
+const cssLetters = (index) => {
 	// pass index to the box- divs, pass store.player to the box-letter- divs and populate the html to display CSS
 	$(`#box-${index}`).removeClass(`box-O`)
 	$(`#box-${index}`).removeClass(`box-X`)
@@ -100,6 +100,10 @@ const cellFlip = (index) => {
         <div class="col-12 box-letter-${store.player} letter-scaled"></div>
       </div>`
 	)
+}
+
+const cellFlip = (index) => {
+  cssLetters(index)
 	// now update the store state object's gameBoard on that index in the array
 	store.gameBoard[index] = store.player
 
@@ -118,6 +122,8 @@ const cellFlip = (index) => {
 	if (store.gameWon) {
 		store.winCase.forEach((box) => {
 			$(`#box-${box}`).addClass('box-game-over')
+      cssLetters(box)
+      store.gameBoard[box] = store.player
 		})
 
 		$('#start-button-container').show()
@@ -197,11 +203,8 @@ const onCellSelect = (event) => {
         index = actions.aiTurn(store.gameBoard)
         console.log(`the index for ai is: ${index}`)
         cellFlip(index)
-        // console.log("the board after ai move is: " + store.gameBoard)
-        // console.log("the player before change is: " + store.player);
 
         actions.changePlayer()
-        // console.log("the player after change is: " + store.player);
       }
     },200)
   }
