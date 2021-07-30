@@ -54,6 +54,7 @@ const onSignInSuccess = (response) => {
   $('#sign-up-error').hide()
   $('#sign-up-welcome').show()
   $('#player-turn').hide()
+  $('#play-ai-btn').show()
   api.allGames()
     .then(onGetAllGamesSuccess)
     .catch(onGetAllGamesFailure)
@@ -90,6 +91,7 @@ const onSignOutSuccess = () => {
   $('#stats-btn').hide()
   $('#stats-title').hide()
   $('#stats-table').hide()
+  $('#play-ai-btn').hide()
   $('#stats-btn').text('show games')
   store.gameBoard = []
   store.playing = false
@@ -112,14 +114,24 @@ const onGetAllGamesSuccess = (response) => {
   $('#total-games-played').text(`${store.games.length}`)
 
   $('#stats-body').empty()
-  store.games.forEach((game, index) => {
+  const gamesReversed = store.games.slice(0)
+  gamesReversed.reverse()
+  console.log('...reversed...')
+  console.log(gamesReversed)
+  let gameNum = store.games.length
+  gamesReversed.forEach((game, index) => {
     let created = Date.parse(game.createdAt)
-
     const monthsArr = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec']
     let dateObj = new Date(created)
     let year = dateObj.getFullYear()
     let month = monthsArr[dateObj.getMonth()]
     let day = dateObj.getDate()
+    let hour = dateObj.getHours()
+    let minutes = dateObj.getMinutes()
+    let amPm 
+    amPm = hour < 12 ? 'AM' : 'PM'
+    hour = hour > 12 ? hour - 12 : hour
+    minutes = minutes < 10 ? '0' + minutes : minutes
     let oldBoard = game.cells
     let winner = 'none'
     if (actions.playerWins(oldBoard, 'X')) {
@@ -127,16 +139,17 @@ const onGetAllGamesSuccess = (response) => {
     } else if (actions.playerWins(oldBoard, "O")) {
       winner = 'O won'
     }
-    $("#stats-body").append(
-      `
+    $('#stats-body').append(
+			`
       <tr>
-        <th scope="row">${index + 1}</th>
+        <th scope="row">${gameNum}</th>
         <td>${game._id}</td>
-        <td>${year} ${month} ${day}</td>
+        <td>${month} ${day} ${year}  ${hour}:${minutes} ${amPm}</td>
         <td>${winner}</td>
       </tr>
       `
-    );
+		)
+    gameNum--
   })
 
   console.log(xWins.length)
@@ -164,6 +177,7 @@ const onGameStartSuccess = (response) => {
   $('.message').hide()
   $('#start-button-container').hide()
   $('#game-board-title').show()
+  $('#play-ai-btn').hide()
   $('.box').removeClass('box-game-over')
   $('.box').removeClass('box-game-tie')
   $('#box-0').removeClass('box-O')
@@ -201,9 +215,9 @@ const onGameStartSuccess = (response) => {
   // actions.getAllGames()
 }
 
-const onCellSelectSuccess = () => {
+const onCellFlipSuccess = () => {
   console.log('API was pinged and board was updated!')
-  if(store.gameWon) {
+  if(store.gameOver) {
     api.allGames()
     .then(onGetAllGamesSuccess)
     .catch(onGetAllGamesFailure);
@@ -217,7 +231,7 @@ module.exports = {
   onSignInSuccess,
   onSignOutSuccess,
   onGameStartSuccess,
-  onCellSelectSuccess,
+  onCellFlipSuccess,
   onGetAllGamesSuccess,
   onGetAllGamesFailure,
   onSignInFailure

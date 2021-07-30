@@ -68,33 +68,76 @@ const onToggleStats = (event) => {
   }
 }
 
-const cellSelectApi = (i) => {
-  // create the data object for the API PATCH
-  const data = {
-    game: {
-      cell: {
-        index: i,
-        value: store.player,
-      },
-      over: store.gameOver,
-    },
+const onToggleAi = (event) => {
+  event.preventDefault()
+  store.ai = !store.ai
+  if (store.ai) {
+    $('#play-ai-btn').text('AI')
+  } else {
+    $('#play-ai-btn').text('Human')
   }
-  // send the data object to the API PATCH call
-  console.log(data)
-  console.log(store.token)
-  api
-    .cellSelect(data)
-    // action for successful API PATCH
-    .then(ui.onCellSelectSuccess)
-    // .then(api.allGames)
-    // .then(ui.onGetAllGamesSuccess)
-
-    // action for failed API PATH
-    .catch(ui.onFailure)
 }
 
-const onResumeGame = (event) => {
+const cellFlip = (index) => {
+	// pass index to the box- divs, pass store.player to the box-letter- divs and populate the html to display CSS
+	$(`#box-${index}`).removeClass(`box-O`)
+	$(`#box-${index}`).removeClass(`box-X`)
+	$(`#box-${index}`).addClass(`box-${store.player}`)
+	console.log('...in cell flip...')
+	console.log(store.player)
+	$(`#box-${index}`).html(
+		`<div class="row inner-box">
+        <div class="col-12 box-letter-${store.player} letter-scaled"></div>
+      </div>`
+	)
+	// now update the store state object's gameBoard on that index in the array
+	store.gameBoard[index] = store.player
 
+	// now check to see if there is a winner and save result to store.gameWon
+	store.gameWon = actions.checkWin(store.gameBoard, 'X', 'O')
+
+	// then check to see if there is a tie game and save result to store.gameTie
+	store.gameTie = actions.checkTie(store.gameBoard)
+
+	// checks if either win or tie is true, then changes gameOver to true if either returns true
+	if (store.gameWon || store.gameTie) {
+		store.gameOver = true
+	}
+
+	// if there's a winner, change the winning cells color to green, then reset game array and set playing to false
+	if (store.gameWon) {
+		store.winCase.forEach((box) => {
+			$(`#box-${box}`).addClass('box-game-over')
+		})
+
+		$('#start-button-container').show()
+		$('#play-ai-btn').show()
+		$('#player-turn').hide()
+
+		store.gameBoard = []
+		store.playing = false
+	}
+	// if tie game, change board color to gray, then reset game array and set playing to false
+	else if (store.gameTie) {
+		$('.box').addClass('box-game-tie')
+		$('#start-button-container').show()
+		$('#player-turn').hide()
+		store.gameBoard = []
+		store.playing = false
+	}
+  // send the data object to the API PATCH call
+	const data = {
+		game: {
+			cell: {
+				index: index,
+				value: store.player
+			},
+			over: store.gameOver,
+		},
+	}
+	api.cellFlip(data)
+    .then(ui.onCellFlipSuccess)
+    .catch(ui.onFailure)
 }
 
 const onCellSelect = (event) => {
@@ -119,30 +162,26 @@ const onCellSelect = (event) => {
     console.log("clicked..." + index)
 
     // initiate the cell change to 'X' or 'O', update state objects, checkWin, checkTie, change board color, change playing status
-    actions.cellFlip(index)
-    // make the API call
-    cellSelectApi(index)
+    cellFlip(index)
 
     // change the player in store.player object for next turn
     if (!store.gameWon && !store.gameTie) {
-      actions.changePlayer();
+      actions.changePlayer()
       $('#player-turn').text(`Player ${store.player}... It's your turn.`)
     } else if (store.gameWon) {
       $('#player-turn').hide()
+      $('#play-ai-btn').show()
       $('#game-board-title-text').text(`${store.player} Wins! Click 'start game' to play again.`)
     } else if (store.gameTie) {
       $('#player-turn').hide()
+      $('#play-ai-btn').show()
       $('#game-board-title-text').text(`Stalemate! Click 'start game' to play again.`)
 
     }
     if (store.ai && store.player === 'O') {
       // execute an AI turn here
-      console.log(store.gameBoard)
       index = actions.aiTurn(store.gameBoard)
-      console.log(index)
-      console.log(store.gameBoard)
-      actions.cellFlip(index)
-      cellSelectApi(index)
+      cellFlip(index)
       // console.log("the board after ai move is: " + store.gameBoard)
       // console.log("the player before change is: " + store.player);
 
@@ -164,5 +203,6 @@ module.exports = {
   onGameStart,
   onCellSelect,
   onGetGames,
-  onToggleStats
+  onToggleStats, 
+  onToggleAi
 }

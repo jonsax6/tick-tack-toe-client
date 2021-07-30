@@ -39,8 +39,10 @@ const gameStart = (data) => {
   })
 }
 
-const cellSelect = (data) => {
+const cellFlip = (data) => {
   console.log('store ID is:' + store.id)
+  console.log(data)
+  console.log(store.gameBoard)
   return $.ajax({
     url: `${apiUrl}/games/${store.id}`,
     method: 'PATCH',
@@ -66,6 +68,6 @@ module.exports = {
   signIn,
   signOut,
   gameStart,
-  cellSelect,
+  cellFlip,
   allGames
 };

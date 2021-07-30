@@ -39,10 +39,10 @@ const checkWin = (board, a, b) => {
     store.winner = a
     // if player B wins, set state object
   } else if (playerWins(board, b)) {
-    store.winner = b;
+    store.winner = b
   }
   // if either is the winner, return true for the game
-  return playerWins(board, a) || playerWins(board, b);
+  return playerWins(board, a) || playerWins(board, b)
 }
 
 const changePlayer = () => {
@@ -52,7 +52,7 @@ const changePlayer = () => {
 const getAllGames = () => {
   api.allGames(store.token)
     .then(ui.onGetAllGamesSuccess)
-    .catch(ui.onFailure);
+    .catch(ui.onFailure)
 }
 
 
@@ -119,9 +119,9 @@ const findBlockingMove = (board) => {
   let move = null
   // check each edge case, see if those indexes are in the main board array...
   edgeCases.forEach((ec, index) => {
-    if (board[ec[0]] === 'X' && board[ec[1]] === 'X') {
+    if (board[ec[0]] === 'X' && board[ec[1]] === 'X' && board[blockMove[index]] === '') {
       // if so, then place the blockMove with corresponding index.
-      move = blockMove[index];
+      move = blockMove[index]
     }
   })
   return move
@@ -132,16 +132,16 @@ const findAiWin = (board) => {
   // find all available cells and save to an array
   const availCells = emptyCells(board)
   console.log('...in findAiWin... Board is: ' + availCells)
-  // bind the existing board to a local variable
-  const currentBoard = board
 
   for (const cell of availCells) {
     // create a new temp variable based on the local copy using the ...spread so the original doesn't get changed.
-    let tempBoard = [...currentBoard]
+    let tempBoard = board.slice(0)
+
     // try placing an 'O' at indexes from availCells
     tempBoard[cell] = 'O'
+
     // then check for win using checkWin
-    let cellWin = playerWins(tempBoard, "O");
+    let cellWin = playerWins(tempBoard, 'O')
     // if a cell placement wins, update store.gameBoard and store.gameWon then save cell to location variable and return that index
     if (cellWin) {
       store.gameBoard[cell] = 'O'
@@ -179,70 +179,29 @@ const aiTurn = (board) => {
   // console.log(availCells)
   // if there are no winning moves, and no wins to block, do random cell from available
   if (aiWin === null && winBlock === null) {
+    console.log('...in random select...')
     // bind to index variable
     index = randomCell(availCells)
-    console.log('random index: ' + index)
     // save the move to state object
+    store.gameBoard[index] = 'O'
+    return index
+  }
+  // if there is a win, make that the index
+  else if (aiWin !== null) {
+    console.log('...in aiWin...')
+    index = aiWin
     store.gameBoard[index] = 'O'
     return index
   }
   // if there is a human win to block
   else if (winBlock !== null) {
+    console.log('...in winBlock...')
     index = winBlock
-    store.gameBoard[index] = 'O'
+    store.gameBoard[index] = 'O'  
     return index
-  } else if (aiWin !== null) {
-    return aiWin
   }
 }
 
-const cellFlip = (index) => {
-  // pass index to the box- divs, pass store.player to the box-letter- divs and populate the html to display CSS
-  $(`#box-${index}`).removeClass(`box-O`);
-  $(`#box-${index}`).removeClass(`box-X`);
-  $(`#box-${index}`).addClass(`box-${store.player}`);
-  $(`#box-${index}`).html(
-    `<div class="row inner-box">
-        <div class="col-12 box-letter-${store.player} letter-scaled"></div>
-      </div>`
-  )
-  // now update the store state object's gameBoard on that index in the array
-  store.gameBoard[index] = store.player;
-
-  // now check to see if there is a winner and save result to store.gameWon
-  store.gameWon = checkWin(store.gameBoard, 'X', 'O');
-
-  // then check to see if there is a tie game and save result to store.gameTie
-  store.gameTie = checkTie(store.gameBoard);
-
-  // checks if either win or tie is true, then changes gameOver to true if either returns true
-  if (store.gameWon || store.gameTie) {
-    store.gameOver = true
-  }
-
-  // if there's a winner, change the board color to green, then reset game array and set playing to false
-  if (store.gameWon) {
-    store.winCase.forEach(box => {
-      $(`#box-${box}`).addClass('box-game-over')
-    })
-    $('#start-button-container').show()
-    store.gameBoard = []
-    store.playing = false
-    console.log('api here...')
-    // api.allGames()
-    //   .then(ui.onGetAllGamesSuccess)
-    //   .catch(ui.onGetAllGamesFailure)
-  }
-  // if tie game, change board color to yellow, then reset game array and set playing to false
-  else if (store.gameTie) {
-    $('.box').addClass('box-game-tie')
-    $('#start-button-container').show()
-    store.gameBoard = []
-    store.playing = false
-  }
-}
-
-// if none result in win or loss, then choose randomly.
 module.exports = {
   checkWin,
   playerWins,
@@ -250,5 +209,4 @@ module.exports = {
   changePlayer,
   getAllGames,
   aiTurn,
-  cellFlip,
 }
