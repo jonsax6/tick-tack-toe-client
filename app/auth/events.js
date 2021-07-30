@@ -178,17 +178,19 @@ const onCellSelect = (event) => {
       $('#game-board-title-text').text(`Stalemate! Click 'start game' to play again.`)
 
     }
-    if (store.ai && store.player === 'O') {
-      // execute an AI turn here
-      index = actions.aiTurn(store.gameBoard)
-      console.log(`the index for ai is: ${index}`)
-      cellFlip(index)
-      // console.log("the board after ai move is: " + store.gameBoard)
-      // console.log("the player before change is: " + store.player);
+    setTimeout(() => {
+      if (store.ai && store.player === 'O') {
+        // execute an AI turn here
+        index = actions.aiTurn(store.gameBoard)
+        console.log(`the index for ai is: ${index}`)
+        cellFlip(index)
+        // console.log("the board after ai move is: " + store.gameBoard)
+        // console.log("the player before change is: " + store.player);
 
-      actions.changePlayer()
-      // console.log("the player after change is: " + store.player);
-    }
+        actions.changePlayer()
+        // console.log("the player after change is: " + store.player);
+      }
+    },200)
   }
 
   // if cell is occupied, user message displayed to choose again

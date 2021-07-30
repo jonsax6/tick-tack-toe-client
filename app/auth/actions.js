@@ -128,7 +128,7 @@ const findBlockingMove = (board) => {
 }
 
 const findAiWin = (board) => {
-  let location = null
+  let index = null
   // find all available cells and save to an array
   const availCells = emptyCells(board)
   console.log('...in findAiWin... Board is: ' + availCells)
@@ -142,15 +142,15 @@ const findAiWin = (board) => {
 
     // then check for win using checkWin
     let cellWin = playerWins(tempBoard, 'O')
-    // if a cell placement wins, update store.gameBoard and store.gameWon then save cell to location variable and return that index
+    // if a cell placement wins, update store.gameBoard and store.gameWon then save cell to index variable and return that index
     if (cellWin) {
       store.gameBoard[cell] = 'O'
-      location = cell
-      return location
+     index = cell
+      return index
     }
   }
   // if no win is achieved, return null
-  return location
+  return index
 }
 
 
