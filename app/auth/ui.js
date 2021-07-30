@@ -73,6 +73,7 @@ const onSignOutSuccess = () => {
   $('#player-turn').empty()
   $('#login-title').hide()
   $('#games-title').hide()
+  $('#play-ai-btn').hide()
   $('#total-games-played').hide()
   $('#user-login-message').show()
   $('#user-login-message').text(`Thank you for playing! Until next time...`)
