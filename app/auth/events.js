@@ -111,7 +111,7 @@ const cellFlip = (index) => {
 		})
 
 		$('#start-button-container').show()
-		$('#play-ai-btn').show()
+		$('#li-ai-btn').show()
 		$('#player-turn').hide()
 
 		store.gameBoard = []
@@ -170,11 +170,11 @@ const onCellSelect = (event) => {
       $('#player-turn').text(`Player ${store.player}... It's your turn.`)
     } else if (store.gameWon) {
       $('#player-turn').hide()
-      $('#play-ai-btn').show()
+      $('#li-ai-btn').show()
       $('#game-board-title-text').text(`${store.player} Wins! Click 'start game' to play again.`)
     } else if (store.gameTie) {
       $('#player-turn').hide()
-      $('#play-ai-btn').show()
+      $('#li-ai-btn').show()
       $('#game-board-title-text').text(`Stalemate! Click 'start game' to play again.`)
 
     }

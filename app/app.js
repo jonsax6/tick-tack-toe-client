@@ -31,7 +31,7 @@ $(() => {
   $('#stats-table').hide()
   $('#stats-btn').hide()
   $('#stats-title').hide()
-  $('#play-ai-btn').hide()
+  $('#li-ai-btn').hide()
   $('#play-ai-btn').on('click', authEvents.onToggleAi)
   $('#stats-btn').on('click', authEvents.onToggleStats)
   $('#sign-up-form').on('submit', authEvents.onSignUp)
