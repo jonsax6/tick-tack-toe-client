@@ -178,7 +178,16 @@ const aiTurn = (board) => {
   // console.log(winBlock)
   // console.log(availCells)
   // if there are no winning moves, and no wins to block, do random cell from available
-  if (aiWin === null && winBlock === null) {
+
+  // for the first 'O' move, if center is free, take that first
+  if(board[4] === '' && store.level === 'difficult'){
+    index = 4
+    return index
+  // for the first 'O' move, if the center is taken, choose the first corner
+  } else if (board[4] === 'X' && board[0] === '' && store.level === 'difficult') {
+    index = 0
+    return index
+  } else if (aiWin === null && winBlock === null) {
     console.log('...in random select...')
     // bind to index variable
     index = randomCell(availCells)

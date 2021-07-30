@@ -78,6 +78,16 @@ const onToggleAi = (event) => {
   }
 }
 
+const onToggleLevel = (event) => {
+  event.preventDefault()
+  store.level = store.level === 'easy' ? store.level = 'difficult' : store.level = 'easy'
+  if (store.level === 'easy') {
+    $('#level-ai-btn').text('Easy')
+  } else {
+    $('#level-ai-btn').text('Difficult')
+  }
+}
+
 const cellFlip = (index) => {
 	// pass index to the box- divs, pass store.player to the box-letter- divs and populate the html to display CSS
 	$(`#box-${index}`).removeClass(`box-O`)
@@ -111,7 +121,8 @@ const cellFlip = (index) => {
 		})
 
 		$('#start-button-container').show()
-		$('#li-ai-btn').show()
+		$('#li-ai').show()
+    $('#li-level').show()
 		$('#player-turn').hide()
 
 		store.gameBoard = []
@@ -170,11 +181,13 @@ const onCellSelect = (event) => {
       $('#player-turn').text(`Player ${store.player}... It's your turn.`)
     } else if (store.gameWon) {
       $('#player-turn').hide()
-      $('#li-ai-btn').show()
+      $('#li-ai').show()
+      $('#li-level').show()
       $('#game-board-title-text').text(`${store.player} Wins! Click 'start game' to play again.`)
     } else if (store.gameTie) {
       $('#player-turn').hide()
-      $('#li-ai-btn').show()
+      $('#li-ai').show()
+      $('#li-level').show()
       $('#game-board-title-text').text(`Stalemate! Click 'start game' to play again.`)
 
     }
@@ -207,5 +220,6 @@ module.exports = {
   onCellSelect,
   onGetGames,
   onToggleStats, 
-  onToggleAi
+  onToggleAi,
+  onToggleLevel
 }

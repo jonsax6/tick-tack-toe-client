@@ -54,7 +54,8 @@ const onSignInSuccess = (response) => {
   $('#sign-up-error').hide()
   $('#sign-up-welcome').show()
   $('#player-turn').hide()
-  $('#li-ai-btn').show()
+  $('#li-ai').show()
+  $('#li-level').show()
   api.allGames()
     .then(onGetAllGamesSuccess)
     .catch(onGetAllGamesFailure)
@@ -73,9 +74,11 @@ const onSignOutSuccess = () => {
   $('#player-turn').empty()
   $('#login-title').hide()
   $('#games-title').hide()
-  $('#li-ai-btn').hide()
+  $('#li-ai').hide()
+  $('#li-level').hide()
   $('#total-games-played').hide()
   $('#user-login-message').show()
+  $('#game-board-title-text').text("Let's Play Some Tick Tack Toe!")
   $('#user-login-message').text(`Thank you for playing! Until next time...`)
   $('#user-login-message').fadeOut(4000)
   $('#login-title').show(4500)
@@ -92,7 +95,8 @@ const onSignOutSuccess = () => {
   $('#stats-btn').hide()
   $('#stats-title').hide()
   $('#stats-table').hide()
-  $('#li-ai-btn').hide()
+  $('#li-ai').hide()
+  $('#li-level').hide()
   $('#stats-btn').text('show games')
   $('.box').removeClass('box-game-over')
   $('.box').removeClass('box-game-tie')
@@ -115,9 +119,11 @@ const onSignOutSuccess = () => {
   $('#box-7').removeClass('box-X')
   $('#box-8').removeClass('box-X')
   $('#play-ai-btn').text('Human')
+  $('#level-ai-btn').text('Easy')
   store.gameBoard = []
   store.playing = false
   store.ai = false
+  store.level = 'easy'
 }
 
 const onGetAllGamesSuccess = (response) => {
@@ -200,7 +206,8 @@ const onGameStartSuccess = (response) => {
   $('.message').hide()
   $('#start-button-container').hide()
   $('#game-board-title').show()
-  $('#li-ai-btn').hide()
+  $('#li-ai').hide()
+  $('#li-level').hide()
   $('.box').removeClass('box-game-over')
   $('.box').removeClass('box-game-tie')
   $('#box-0').removeClass('box-O')

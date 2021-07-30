@@ -14,6 +14,7 @@ $(() => {
   store.gameOver = false
   store.stats = false
   store.ai = false
+  store.level = 'easy'
   $('#sign-out-btn').hide();
   $('.game-row').hide()
   $('#start-button-container').hide()
@@ -31,8 +32,10 @@ $(() => {
   $('#stats-table').hide()
   $('#stats-btn').hide()
   $('#stats-title').hide()
-  $('#li-ai-btn').hide()
+  $('#li-ai').hide()
+  $('#li-level').hide()
   $('#play-ai-btn').on('click', authEvents.onToggleAi)
+  $('#level-ai-btn').on('click', authEvents.onToggleLevel)
   $('#stats-btn').on('click', authEvents.onToggleStats)
   $('#sign-up-form').on('submit', authEvents.onSignUp)
   $('#sign-in-form').on('submit', authEvents.onSignIn)
