@@ -118,13 +118,20 @@ const findBlockingMove = (board) => {
   // if there's no move to block, return null
   let move = null
   // check each edge case, see if those indexes are in the main board array...
-  edgeCases.forEach((ec, index) => {
-    if (board[ec[0]] === 'X' && board[ec[1]] === 'X' && board[blockMove[index]] === '') {
-      // if so, then place the blockMove with corresponding index.
-      move = blockMove[index]
-    }
-  })
-  return move
+  if (store.gameWon) { return null }
+  else {
+    edgeCases.forEach((ec, index) => {
+      if (
+        board[ec[0]] === 'X' &&
+        board[ec[1]] === 'X' &&
+        board[blockMove[index]] === ''
+      ) {
+        // if so, then place the blockMove with corresponding index.
+        move = blockMove[index]
+      }
+    })
+    return move
+  }
 }
 
 const findAiWin = (board) => {
@@ -146,6 +153,7 @@ const findAiWin = (board) => {
     if (cellWin) {
       store.gameBoard[cell] = 'O'
       index = cell
+      store.gameWon = true
       return index
     }
   }
@@ -177,17 +185,41 @@ const cornerTest = (board) => {
   return number
 }
 
+const sideCorner = (board) => {
+  let isSideCorner = false
+  let numberOfXs = 0
+  board.forEach(cell => {
+    if (cell === 'X') {
+      numberOfXs++
+    }
+  })
+  if (numberOfXs === 2) {
+    if (
+    // test each case of a side and either opposite corner are 'X's
+    ((board[1] === 'X' && board[6] === 'X') || (board[1] === 'X' && board[8] === 'X')) ||
+    ((board[3] === 'X' && board[2] === 'X') || (board[3] === 'X' && board[8] === 'X')) ||     
+    ((board[5] === 'X' && board[0] === 'X') || (board[5] === 'X' && board[6] === 'X')) ||
+    ((board[7] === 'X' && board[0] === 'X') || (board[7] === 'X' && board[2] === 'X'))
+    )
+    {
+      // if any side-corner case is true, we get into this expression body, if not, we return false below
+      isSideCorner = true
+      return isSideCorner
+    }
+  } else {
+    return isSideCorner
+  }
+}
+
 // now using the above helper functions let's do a full AI turn
 const aiTurn = (board) => {
   const aiWin = findAiWin(board)
   const winBlock = findBlockingMove(board)
   const availCells = emptyCells(board)
   // test for the number of open corners
-  console.log(availCells)
   let corners = cornerTest(board)
-  console.log(corners)
   let index
-  console.log(board)
+  console.log(store.level)
 
   // as the first priority, always check if there is a 'X' win to block
   if (winBlock !== null) {
@@ -195,7 +227,8 @@ const aiTurn = (board) => {
 		index = winBlock
 		// store.gameBoard[index] = 'O'
 		return index
-	} 
+	}
+  // next check for a winning move
   else if (aiWin !== null) {
 		console.log('...in aiWin...')
 		index = aiWin
@@ -203,12 +236,12 @@ const aiTurn = (board) => {
 		return index
 	}
 	// if the middle is open during the second move, choose it
-	else if (aiWin === null && board[4] === '' && store.level === 'difficult') {
+	else if (board[4] === '' && store.level === 'difficult') {
 		index = 4
 		return index
 		// or, if the center is taken for first 'X' move, choose the first corner
 	} else if (
-    aiWin === null &&
+    !store.gameWon &&
 		board[4] === 'X' &&
 		board[0] === '' &&
 		store.level === 'difficult'
@@ -218,7 +251,7 @@ const aiTurn = (board) => {
 	}
 	// if 'X' has middle and 'O' has one corner, take another corner
 	else if (
-    aiWin === null &&
+    !store.gameWon &&
 		board[4] === 'X' &&
 		board[0] === 'O' &&
 		(board[2] === '' || board[6] === '' || board[8] === '') &&
@@ -226,17 +259,33 @@ const aiTurn = (board) => {
 		store.level === 'difficult'
 	) {
 		// this series returns the first open corner if directly above is true
-		if (aiWin === null && board[2] === '') {
+		console.log('...yup...')
+    if (!store.gameWon && board[2] === '') {
 			index = 2
 			return index
-		} else if (aiWin === null && board[6] === '') {
+		} else if (!store.gameWon && board[6] === '') {
 			index = 6
 			return index
-		} else {
+		} else if (!store.gameWon && board[8] ==='') {
 			index = 8
 			return index
 		}
-	}
+	} else if (store.level === 'difficult' && sideCorner(board)) {
+    // now we need to choose an 'X' on a corner next to the side 'X'
+    if (board[1] === 'X') {
+      index = 2
+      return index
+    } else if (board[3] === 'X') {
+      index = 0
+      return index
+    } else if (board[5] === 'X') {
+      index = 2
+      return index
+    } else {
+      index = 6
+      return index
+    }
+  }
 	// if no aiWin or no winBlock moves available, then just pick randomly
 	else {
 		console.log('...in random select...')

@@ -122,7 +122,7 @@ const cellFlip = (index) => {
 	if (store.gameWon) {
 		store.winCase.forEach((box) => {
 			$(`#box-${box}`).addClass('box-game-over')
-      cssLetters(box)
+      // cssLetters(box)
       store.gameBoard[box] = store.player
 		})
 
