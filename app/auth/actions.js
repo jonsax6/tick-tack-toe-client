@@ -210,6 +210,30 @@ const sideCorner = (board) => {
   }
 }
 
+// determines if there are two middle 'X's in adjacent sides for move 3
+const sideSide = (board) => {
+  let isSideSide = false
+  let numberOfXs = 0
+  board.forEach((cell) => {
+    if (cell === 'X') {
+      numberOfXs++
+    }
+  })
+  if (numberOfXs === 2) {
+    if (
+      (board[1] === 'X' && board[3] === 'X') ||
+      (board[3] === 'X' && board[7] === 'X') ||
+      (board[7] === 'X' && board[5] === 'X') ||
+      (board[1] === 'X' && board[5] === 'X')
+    ) {
+      isSideSide = true
+      return isSideSide
+    }
+  } else {
+    return isSideSide
+  }
+}
+
 // now using the above helper functions let's do a full AI turn
 const aiTurn = (board) => {
   const aiWin = findAiWin(board)
@@ -278,6 +302,20 @@ const aiTurn = (board) => {
       return index
     } else {
       index = 6
+      return index
+    }
+  } else if (store.level === 'difficult' && sideSide(board)) {
+    if (board[1] === 'X' && board[3] === 'X') {
+      index = 0
+      return index
+    } else if (board[3] === 'X' && board[7] === 'X') {
+      index = 6
+      return index
+    } else if (board[7] === 'X' && board[5] === 'X') {
+      index = 8
+      return index
+    } else {
+      index = 2
       return index
     }
   }
