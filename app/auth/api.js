@@ -40,10 +40,6 @@ const gameStart = (data) => {
 }
 
 const cellFlip = (data) => {
-  console.log('store ID is:' + store.id)
-  console.log(data)
-  console.log(store.gameBoard)
-  console.log(`${apiUrl}/games/${store.id}`)
   return $.ajax({
     url: `${apiUrl}/games/${store.id}`,
     method: 'PATCH',

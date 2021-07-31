@@ -138,7 +138,6 @@ const findAiWin = (board) => {
   let index = null
   // find all available cells and save to an array
   const availCells = emptyCells(board)
-  console.log('...in findAiWin... Board is: ' + availCells)
 
   for (const cell of availCells) {
     // create a new temp variable based on the local copy using the ...spread so the original doesn't get changed.
@@ -219,18 +218,15 @@ const aiTurn = (board) => {
   // test for the number of open corners
   let corners = cornerTest(board)
   let index
-  console.log(store.level)
 
   // as the first priority, always check if there is a 'X' win to block
   if (winBlock !== null) {
-		console.log('...in winBlock...')
 		index = winBlock
 		// store.gameBoard[index] = 'O'
 		return index
 	}
   // next check for a winning move
   else if (aiWin !== null) {
-		console.log('...in aiWin...')
 		index = aiWin
 		// store.gameBoard[index] = 'O'
 		return index
@@ -259,7 +255,6 @@ const aiTurn = (board) => {
 		store.level === 'difficult'
 	) {
 		// this series returns the first open corner if directly above is true
-		console.log('...yup...')
     if (!store.gameWon && board[2] === '') {
 			index = 2
 			return index
@@ -288,7 +283,6 @@ const aiTurn = (board) => {
   }
 	// if no aiWin or no winBlock moves available, then just pick randomly
 	else {
-		console.log('...in random select...')
 		// bind to index variable
 		index = randomCell(availCells)
 		// save the move to state object

@@ -25,6 +25,8 @@ A simple tick tack toe game.  Allows users to sign-up for an account, sign-in, s
   * sign-in form
   * sign-out button
   * functions to check for game win scenarios, tie games, and change player.
+  * helper functions
+  * Computer player algorithm
 
 * js files were organized into the following structure: 
   * events.js to handle event listener functions.
@@ -49,9 +51,15 @@ A simple tick tack toe game.  Allows users to sign-up for an account, sign-in, s
   * making sure that any lingering 'session-specific' html elements or text was removed upon sign-out using jquery's $.empty() method.
 * bugs/problems usually solved with careful observation of the order of events, simplifying with console.logs, and reading error codes for guidance locating the bugs.
 
-### Unsolved problems
+### Stretch Goals Attained
 
-* change password feature
-* fully debugged computer player
-* CSS animations and action events like 'onHover', and .hide() time-outs and animations.
-  
+* implemented a toggle-able past games stats table, most recent game first
+  * table stats include: game number, date and time, and winner
+* created two difficulty levels for the computer player, an easy and a difficult level
+* computer player/human player and difficulty level are both toggles 
+* implemented a scoreboard with number of 'X' and 'O' wins as well as total games played for user account
+* Created CSS classes that turn the board win cells to green, or entire board to gray if tie game
+    
+### Future Stretch Goals
+
+* Click on a past game to show the board as it was in it's final state

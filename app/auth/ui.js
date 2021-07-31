@@ -5,7 +5,6 @@ const events = require('./events')
 const api = require('./api')
 
 const onSignUpSuccess = (response) => {
-  console.log('Sign-up success!')
   $('#sign-up-form').trigger('reset')
   $('#sign-up').hide()
   $('#login-title').text('Thank you! You can sign-in now...')
@@ -19,21 +18,18 @@ const onSignUpFailure = () => {
 }
 
 const onFailure = (error) => {
-  console.log(`Error, status: ${error.status}`)
   $('#user-message').show()
   $("#user-message").html(`<h4>Error... status: ${error.status}</h4>`);
   $('#sign-up-form').trigger('reset')
 }
 
 const onSignInFailure = (error) => {
-  console.log(`Error, status: ${error.status}`)
   $('#login-title').hide()
   $('#user-login-message').show()
   $('#user-login-message').text('Account not found.  Try another account!')
 }
 
 const onSignInSuccess = (response) => {
-  console.log('sign-in success')
   store.token = response.user.token
   store.user = response.user.email
   $('#username-display').text(`profile: ${store.user}`)
@@ -62,7 +58,6 @@ const onSignInSuccess = (response) => {
 }
 
 const onSignOutSuccess = () => {
-  console.log('sign out success')
   $('.box').empty()
   $('#username-display').empty()
   $('#x-wins').text('-')
@@ -145,8 +140,6 @@ const onGetAllGamesSuccess = (response) => {
   $('#stats-body').empty()
   const gamesReversed = store.games.slice(0)
   gamesReversed.reverse()
-  console.log('...reversed...')
-  console.log(gamesReversed)
   let gameNum = store.games.length
   gamesReversed.forEach((game, index) => {
     let created = Date.parse(game.createdAt)
@@ -172,7 +165,6 @@ const onGetAllGamesSuccess = (response) => {
 			`
       <tr>
         <th scope="row">${gameNum}</th>
-        <td>${game._id}</td>
         <td>${month} ${day} ${year}  ${hour}:${minutes} ${amPm}</td>
         <td>${winner}</td>
       </tr>
@@ -180,16 +172,9 @@ const onGetAllGamesSuccess = (response) => {
 		)
     gameNum--
   })
-
-  console.log(xWins.length)
-  console.log(oWins.length)
-  console.log(store.games)
-  console.log(response)
-  console.log(store.id)
 }
 
 const onGetAllGamesFailure = (error) => {
-  console.log(error)
 }
 
 const onGameStartSuccess = (response) => {
@@ -198,8 +183,6 @@ const onGameStartSuccess = (response) => {
   store.gameWon = false
   store.gameTie = false
   store.gameOver = false
-  console.log(store.id)
-  console.log('new game created...')
   $("#game-board-title-text").text(`Let's Play Some Tick Tack Toe!`)
   $('#sign-in-form').trigger('reset')
   $("#player-turn").show();
@@ -246,7 +229,6 @@ const onGameStartSuccess = (response) => {
 }
 
 const onCellFlipSuccess = () => {
-  console.log('API was pinged and board was updated!')
   if(store.gameOver) {
     api.allGames()
     .then(onGetAllGamesSuccess)

@@ -7,7 +7,6 @@ const actions = require('./actions')
 
 const onSignUp = (event) => {
   event.preventDefault()
-  console.log('...in signup...')
 
   // get information from event and form
   const form = event.target
@@ -21,10 +20,8 @@ const onSignUp = (event) => {
 
 const onSignIn = (event) => {
   event.preventDefault()
-  console.log('...in sign-in...')
   const form = event.target
   const data = getFormFields(form)
-  console.log(data)
   api.signIn(data)
     .then(ui.onSignInSuccess)
     .catch(ui.onSignInFailure)
@@ -33,7 +30,6 @@ const onSignIn = (event) => {
 const onSignOut = (event) => {
   event.preventDefault()
   store.stats = false
-  console.log('...in sign-out...')
   api.signOut()
     .then(ui.onSignOutSuccess)
     .catch(ui.onFailure)
@@ -72,7 +68,7 @@ const onToggleAi = (event) => {
   event.preventDefault()
   store.ai = !store.ai
   if (store.ai) {
-    $('#play-ai-btn').text('AI')
+    $('#play-ai-btn').text('Computer')
   } else {
     $('#play-ai-btn').text('Human')
   }
@@ -93,8 +89,6 @@ const cssLetters = (index) => {
 	$(`#box-${index}`).removeClass(`box-O`)
 	$(`#box-${index}`).removeClass(`box-X`)
 	$(`#box-${index}`).addClass(`box-${store.player}`)
-	console.log('...in cell flip...')
-	console.log(store.player)
 	$(`#box-${index}`).html(
 		`<div class="row inner-box">
         <div class="col-12 box-letter-${store.player} letter-scaled"></div>
@@ -176,7 +170,6 @@ const onCellSelect = (event) => {
   // checks to see if the cell is empty first, if so, then execute main function body
   else if (store.gameBoard[index] === '') {
     $('#game-board-title-text').html('Game On!')
-    console.log("clicked..." + index)
 
     // initiate the cell change to 'X' or 'O', update state objects, checkWin, checkTie, change board color, change playing status
     cellFlip(index)
@@ -201,7 +194,6 @@ const onCellSelect = (event) => {
       if (store.ai && store.player === 'O') {
         // execute an AI turn here
         index = actions.aiTurn(store.gameBoard)
-        console.log(`the index for ai is: ${index}`)
         cellFlip(index)
 
         actions.changePlayer()
