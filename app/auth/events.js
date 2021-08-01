@@ -202,7 +202,7 @@ const onCellSelect = (event) => {
 
         actions.changePlayer()
       }
-    },200)
+    },500)
   }
 
   // if cell is occupied, user message displayed to choose again

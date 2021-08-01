@@ -227,7 +227,7 @@ const onGetAllGamesSuccess = (response) => {
       `
 		)
 
-    // decrement the game number so we show highest number first then descending down 
+    // decrement the game number so we show highest number first then descending down git 
     gameNum--
   })
 }

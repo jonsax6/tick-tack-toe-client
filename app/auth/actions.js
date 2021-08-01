@@ -234,6 +234,27 @@ const sideSide = (board) => {
   }
 }
 
+const cornerCorner = (board) => {
+  let isCornerCorner = false
+  let numberOfXs = 0
+  board.forEach((cell) => {
+    if (cell === 'X') {
+      numberOfXs++
+    }
+  })
+  if (numberOfXs === 2) {
+    if (
+      (board[0] === 'X' && board[8]) ||
+      (board[2] === 'X' && board[6])
+    ) {
+      isCornerCorner = true
+      return isCornerCorner
+    }
+  } else {
+    return isCornerCorner
+  }
+}
+
 // now using the above helper functions let's do a full AI turn
 const aiTurn = (board) => {
   const aiWin = findAiWin(board)
@@ -316,6 +337,14 @@ const aiTurn = (board) => {
       return index
     } else {
       index = 2
+      return index
+    }
+  } else if (store.level === 'difficult' && cornerCorner(board)) {
+    if (board[0] === 'X' && board[8] === 'X') {
+      index = 1
+      return index
+    } else if (board[2] === 'X' && board[6] === 'X') {
+      index = 1
       return index
     }
   }
