@@ -73,6 +73,7 @@ const onSignOutSuccess = () => {
   $('#btn-level').hide()
   $('#total-games-played').hide()
   $('#user-login-message').show()
+  $('#login-title').text('Login to Tick Tack Toe:')
   $('#game-board-title-text').text("Let's Play Some Tick Tack Toe!")
   $('#user-login-message').text(`Thank you for playing! Until next time...`)
   $('#user-login-message').fadeOut(4000)
@@ -122,45 +123,100 @@ const onSignOutSuccess = () => {
 }
 
 const onGetAllGamesSuccess = (response) => {
+  // arrays for the scoreboard, array.length will give the correct score for X and O
   let xWins = []
   let oWins = []
+  // create a state object for the returned games array
   store.games = response.games
+
   store.games.forEach((game) => {
-    let oldBoard = game.cells;
-    if (actions.playerWins(oldBoard, "X")) {
-      xWins.push(oldBoard);
-    } else if (actions.playerWins(oldBoard, "O")) {
-      oWins.push(oldBoard);
+    // variable for just the board cells in the old game
+    const oldBoard = game.cells
+    // new board variable making sure all letters are upper case, 
+    // to account for other user accounts that may have lower case letters
+    const oldBoardNormalized = oldBoard.map(cell => cell.toUpperCase())
+    // check for the winner for this old game by running checkWin helper function
+    if (actions.playerWins(oldBoardNormalized, 'X')) {
+      // if winner is X, push to the xWins array
+      xWins.push(oldBoardNormalized);
+    } else if (actions.playerWins(oldBoardNormalized, 'O')) {
+      // if winner is O, push to the oWins array
+      oWins.push(oldBoardNormalized);
     }
-  });
+  })
   $('#x-wins').text(`${xWins.length}`)
   $('#o-wins').text(`${oWins.length}`)
   $('#total-games-played').text(`${store.games.length}`)
 
+  // now start populating the game stats table
+  // first empty any old data so we have a clean slate
   $('#stats-body').empty()
+  // reverse the array so most recent game is at the top
   const gamesReversed = store.games.slice(0)
   gamesReversed.reverse()
+
+  // start at all the games played, then decrement at the bottom so that we count downwards
   let gameNum = store.games.length
-  gamesReversed.forEach((game, index) => {
+
+  // iterate each game and populate the table 
+  gamesReversed.forEach((game) => {
+    // game creation date
     let created = Date.parse(game.createdAt)
+    
+    // variable indexing months to convert month number to it's 3 letter string
     const monthsArr = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec']
+    
+    // create a javascript Date object from the Date prototype
     let dateObj = new Date(created)
+
+    // pull out the year from the dateObj
     let year = dateObj.getFullYear()
+
+    // pull out the month from the dateObj, then convert into 3 letter string by putting that number
+    // as the index in the monthsArr array
     let month = monthsArr[dateObj.getMonth()]
+
+    // pull out the day from the dateObj
     let day = dateObj.getDate()
+
+    // pull out the hour from the dateObj
     let hour = dateObj.getHours()
+
+    // pull out the minutes from the dateObj
     let minutes = dateObj.getMinutes()
+
+    // declare am/pm variable
     let amPm 
+
+    // if hour is more than 12 set amPm to PM, otherwise make it AM
     amPm = hour < 12 ? 'AM' : 'PM'
+
+    // if the hour number is greater than 12, subtract 12 for non-military time
     hour = hour > 12 ? hour - 12 : hour
+
+    // make sure the minutes format is two digits (for 0 - 9)
     minutes = minutes < 10 ? '0' + minutes : minutes
+
+    // pull out the game cells for this game we are currently iterating
     let oldBoard = game.cells
-    let winner = 'none'
+
+    // declare winner variable
+    let winner
+
+    // find an X or O winner, or make it a tie
     if (actions.playerWins(oldBoard, 'X')) {
       winner = 'X won'
     } else if (actions.playerWins(oldBoard, "O")) {
       winner = 'O won'
+    } else if (actions.checkTie(oldBoard)) {
+      winner = 'Tie'
+    } 
+    // if game is incomplete return 'none'
+    else {
+      winner = 'none'
     }
+
+    // now populate the table one game at a time for each iteration of this forEach loop
     $('#stats-body').append(
 			`
       <tr>
@@ -170,6 +226,8 @@ const onGetAllGamesSuccess = (response) => {
       </tr>
       `
 		)
+
+    // decrement the game number so we show highest number first then descending down 
     gameNum--
   })
 }
@@ -224,7 +282,7 @@ const onGameStartSuccess = (response) => {
 
   store.player = 'X'
   store.playing = true
-  $('#player-turn').text(`It's your turn, ${store.player}...`)
+  $('#player-turn').text(`Player ${store.player}... It's your turn.`)
   // actions.getAllGames()
 }
 

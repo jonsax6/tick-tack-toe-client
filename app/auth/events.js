@@ -177,7 +177,11 @@ const onCellSelect = (event) => {
     // change the player in store.player object for next turn
     if (!store.gameWon && !store.gameTie) {
       actions.changePlayer()
-      $('#player-turn').text(`Player ${store.player}... It's your turn.`)
+      if (!store.ai) {
+        $('#player-turn').text(`Player ${store.player}... It's your turn.`)
+      } else {
+        $('#player-turn').text(`Player X... It's your turn.`)
+      }
     } else if (store.gameWon) {
       $('#player-turn').hide()
       $('#btn-ai').show()
@@ -188,8 +192,8 @@ const onCellSelect = (event) => {
       $('#btn-ai').show()
       $('#btn-level').show()
       $('#game-board-title-text').text(`Stalemate! Click 'start game' to play again.`)
-
     }
+    $('#player-turn').text('...Beat the algorithm!')
     setTimeout(() => {
       if (store.ai && store.player === 'O') {
         // execute an AI turn here
