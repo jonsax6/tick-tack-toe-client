@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+    <head>
+      <title>Tick Tack Toe</title>
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+
+      <!-- Do not add `link` tags-->
+      <link rel="shortcut icon" type="image/png" href="./app/images/favicon.png">
+
+      <!-- Do not add `script` tags-->
+      <script src="public/vendor.js" type="text/javascript" charset="utf-8" defer></script>
+      <script src="public/application.js" type="text/javascript" charset="utf-8" defer></script>
+    </head>
+    <body>
+      <div class="container-lg">
+        <!-- navbar -->
+        <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-secondary">
+          <div class="container-fluid">
+            <span class="navbar-brand"><img id="ttt-icon" src="app/images/tac.png">Tick Tack Toe</span>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
+              aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+              <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item me-3">
+                  <span id="username-display" class="nav-link active"></span>
+                </li>
+                <li class="me-3 mb-1">
+                  <button id="stats-btn" type="submit" class="btn btn-secondary nav-button">show games</button>
+                </li>
+              </ul>
+              <!-- sign-out button -->
+              <div class="mb-1">
+                <span id="games-title" class="navbar-text mr-5 mb-1">
+                  <span>Games Played:</span>
+                  <span id="total-games-played">-</span>
+                </span>
+              </div>
+
+              <span class="spacer-20"></span>
+              <span class="spacer-20"></span>
+              <div class="mb-1">
+                <span id="score-title" class="navbar-text mr-5 mb-1">
+                  <span>Score:</span>
+                </span>
+                <span class="spacer-20"></span>
+                <span id="x-score" class="navbar-text mr-5 mb-1">
+                  <span class="score-heading"><strong>X</strong></span>
+                  <span id="x-wins" class="score-points">-</span>
+                </span>
+                <span>&nbsp&nbsp</span>
+                <span id="o-score" class="navbar-text mr-5 mb-1">
+                  <span class="score-heading"><strong>O</strong></span>
+                  <span id="o-wins" class="score-points">-</span>
+                </span>
+              </div>
+              <span class="spacer-20"></span>
+              <button id="sign-out-btn" type="submit" class="btn btn-secondary nav-button">Sign Out</button>
+            </div>
+          </div>
+        </nav>
+        <div class="row main">
+          <div class="col-12">
+            <!-- login message -->
+            <!-- <div class="row message">
+                        <div id="message-container" class="col-6">
+                          <h6 id="user-message"></h6>
+                        </div>
+                      </div> -->
+            <!-- login forms container -->
+            <div id="stats-title" class="row">
+              <div class="col-md-6 col-11 m-auto">
+                <h5 id="stats-title-text" class="text-center text-light">Old Games Statistics</h5>
+              </div>
+            </div>
+            <div id="stats-table" class="row">
+              <div class="col-lg-6 col-12 m-auto mt-5">
+                <table class="table table-dark  rounded-3">
+                  <thead>
+                    <tr>
+                      <th scope="col">Game #</th>
+                      <th scope="col">Game Date/Time</th>
+                      <th scope="col">Outcome</th>
+                    </tr>
+                  </thead>
+                  <tbody id="stats-body">
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+
+            <div class="row forms mt-5">
+              <div class="col-12 m-auto sign-in">
+                <div id="sign-in" class="row">
+                  <div class="col-md-6 col-11 text-light m-auto rounded-3 bg-secondary bg-gradient border border-dark shadow-lg p-5">
+                    <form id="sign-in-form">
+                      <h4 id="login-title">Login to Tick Tack Toe:</h4>
+                      <h4 id="user-login-message"></h4>
+                      <div class="mb-3">
+                        <label for="signin-email" class="form-label">Email address</label>
+                        <input name="credentials[email]" type="email" class="form-control border-dark shadow"
+                          placeholder="email@example.com">
+                      </div>
+                      <div class="mb-3">
+                        <label for="signin-password" class="form-label">Password</label>
+                        <input name="credentials[password]" type="password" class="form-control border-dark shadow"
+                          placeholder="enter password">
+                      </div>
+                      <button type="submit" class="btn btn-warning border-dark shadow">Login</button>
+                    </form>
+                  </div>
+                </div>
+              </div>
+              <div id="sign-up" class="col-12 m-auto mt-5 sign-up">
+                <div class="row">
+                  <div class="col-md-6 col-11 m-auto text-light rounded-3 bg-secondary bg-gradient border border-dark shadow-lg p-5">
+                    <form id="sign-up-form" autocomplete="off">
+                      <h4 id="sign-up-welcome">Sign up for a new account:</h4>
+                      <h4 id="sign-up-error">There was an error, try again...</h4>
+                      <div class="mb-3">
+                        <label class="form-label">Email address</label>
+                        <input id="sign-up-email" name="credentials[email]" type="email" class="form-control border-dark shadow"
+                          placeholder="email@example.com">
+                        <div id="emailHelp" class="form-text text-light">We'll never share your email with anyone else.</div>
+                      </div>
+                      <div class="mb-3">
+                        <label class="form-label">Password</label>
+                        <input id="sign-up-password" name="credentials[password]" type="password" class="form-control border-dark shadow"
+                          placeholder="enter a password">
+                      </div>
+                      <div class="mb-3">
+                        <label class="form-label">Re-type Password</label>
+                        <input name="credentials[password_confirmation]" type="password" class="form-control border-dark shadow"
+                          placeholder="re-type your password">
+                      </div>
+                      <button type="submit" class="btn btn-warning border-dark shadow shadow">Register</button>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="game-row">
+              <div class="row">
+                <div id="game-board-title" class="col-lg-6 col-md-9 col-sm-12 m-auto">
+                  <h5 id="game-board-title-text" class="text-center text-light">Let's Play Some Tick Tack Toe!</h5>
+                </div>
+                <div class="col-lg-6 col-md-9 col-sm-12 m-auto message">
+                  <h5 id="user-message" class="text-center text-light"></h5>
+                </div>
+              </div>
+              <div id="grid-container" class="row">
+                <div class="col-lg-10 col-sm-12 mx-auto game-box mt-5">
+                  <div class="row grid-row">
+                    <div id="box-0" class="col-4 box">
+                      <!-- <div class="row inner-box">
+                        <div class="col-12 box-sm-letter-X letter-scaled"></div>
+                      </div> -->
+                    </div>
+                    <div id="box-1" class="col-4 box">
+                    </div>
+                    <div id="box-2" class="col-4 box">
+                    </div>
+                  </div>
+                  <div class="row grid-row">
+                    <div id="box-3" class="col-4 box">
+                    </div>
+                    <div id="box-4" class="col-4 box">
+                    </div>
+                    <div id="box-5" class="col-4 box">
+                    </div>
+                  </div>
+                  <div class="row grid-row">
+                    <div id="box-6" class="col-4 box">
+                    </div>
+                    <div id="box-7" class="col-4 box">
+                    </div>
+                    <div id="box-8" class="col-4 box">
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+            <div class="row">
+              <div class="col-lg-6 col-md-9 col-sm-12 m-auto">
+                <div id="game-board-options" class="row">
+                    <div id="start-button-container" class="col-lg-4 col-sm-12 m-auto mb-2 text-center">
+                      <button id="new-game-button" type="submit" class="btn btn-warning text-center">Start Game</button>
+                    </div>
+                    <div id="btn-ai" class="col-lg-4 col-sm-12 m-auto mb-2 text-center">
+                      <button id="play-ai-btn" type="submit" class="btn btn-secondary nav-button">Human</button>
+                    </div>
+                    <div id="btn-level" class="col-lg-4 col-sm-12 m-auto mb-2 text-center">
+                      <button id="level-ai-btn" type="submit" class="btn btn-secondary nav-button">Easy</button>
+                    </div>
+                    <div id="player-turn" class="col-lg-6 col-sm-12 text-light text-center m-auto"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </body>
+</html>
